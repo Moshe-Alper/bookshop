@@ -13,7 +13,7 @@ function renderBookList() {
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
                     <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
-                    <button onclick="onDeleteBook('${book.id}')" class="delete">Delete</button>
+                    <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
             </tr>
         `)
@@ -28,6 +28,9 @@ function onUpdateBook(bookId) {
     console.log(bookId)
 }
 
-function onDeleteBook(bookId) {
-    console.log(bookId)
+function onRemoveBook(bookId) {
+    const idx = getBooks().findIndex(book => book.id === bookId)
+    getBooks().splice(idx, 1)
+
+    renderBookList()
 }
