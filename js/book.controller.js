@@ -1,11 +1,12 @@
 'use strict'
 
 function onInit() {
-    renderBookList()
+    renderBooks()
 }
 
-function renderBookList() {
-    const elBookList = document.querySelector('.book-list')
+function renderBooks() {
+    const elTableBody = document.querySelector('.book-list')
+
     const strHtml = getBooks().map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
@@ -17,7 +18,7 @@ function renderBookList() {
                 </td>
             </tr>
         `)
-    elBookList.innerHTML = strHtml.join('')
+    elTableBody.innerHTML = strHtml.join('')
 }
 
 function onReadBook(bookId) {
@@ -25,11 +26,9 @@ function onReadBook(bookId) {
 }
 
 function onUpdateBook(bookId) {
-    const book = getBooks().find(book => book.id === bookId)
-
-    const newPrice = +prompt('Update the book price:', book.price)
-    updatePrice(bookId, newPrice)
-    renderBookList()
+   
+    updatePrice(bookId)
+    renderBooks()
 }
 
 function onRemoveBook(bookId) {

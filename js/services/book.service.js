@@ -27,7 +27,9 @@ function getBooks() {
     return gBooks
 }
 
-function updatePrice(bookId, newPrice) {
+function updatePrice(bookId) {
+    const book = getBooks().find(book => book.id === bookId) 
+    const newPrice = +prompt('Update the book price:', book.price)
     const bookIdx = gBooks.findIndex(book => book.id == bookId)
     gBooks[bookIdx].price = newPrice
 }
