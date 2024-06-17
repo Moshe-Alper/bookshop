@@ -36,3 +36,7 @@ function onRemoveBook(bookId) {
     removeBook(bookId)
     renderBookList()
 }
+
+function onAddBook() {
+    console.log('hi');
+}

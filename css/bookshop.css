@@ -21,8 +21,6 @@ header {
     margin-block-end: 1em;
 
     text-align: center;
-
-    
 }
 
 header h1 {
@@ -30,17 +28,23 @@ header h1 {
 }
 
 main.main-content {
-    flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+
+    align-items: center;
+    justify-content: flex-start;
 
     padding-block: 1em;
     overflow-y: auto;
 }
 
+
 table {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     font-size: 0.8rem;
@@ -58,7 +62,8 @@ td {
     padding: 8px 10px;
 }
 
-td button {
+td button,
+.add {
     border: none;
     border-radius: 8px;
     padding: 6px 12px;
@@ -66,6 +71,10 @@ td button {
     cursor: pointer;
 }
 
+.add {
+    background-color: greenyellow;
+    margin-block-end: 8px;
+}
 tbody>tr:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
