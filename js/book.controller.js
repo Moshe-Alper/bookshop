@@ -33,8 +33,6 @@ function onUpdateBook(bookId) {
 }
 
 function onRemoveBook(bookId) {
-    const idx = getBooks().findIndex(book => book.id === bookId)
-    getBooks().splice(idx, 1)
-
+    removeBook(bookId)
     renderBookList()
 }
