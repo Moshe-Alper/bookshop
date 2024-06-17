@@ -25,7 +25,11 @@ function onReadBook(bookId) {
 }
 
 function onUpdateBook(bookId) {
-    console.log(bookId)
+    const book = getBooks().find(book => book.id === bookId)
+
+    const newPrice = +prompt('Update the book price:', book.price)
+    updatePrice(bookId, newPrice)
+    renderBookList()
 }
 
 function onRemoveBook(bookId) {
