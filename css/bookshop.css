@@ -41,18 +41,13 @@ main.main-content {
 
 
 table {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     font-size: 0.8rem;
     letter-spacing: 1px;
 }
 
-thead,
-tfoot {
+thead {
     background-color: rgb(163, 168, 171);
 }
 
