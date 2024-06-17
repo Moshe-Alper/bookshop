@@ -8,7 +8,7 @@
     <title>Book Shop</title>
 </head>
 
-<body>
+<body onload="onInit()">
     <table>
         <thead>
             <tr>
@@ -17,37 +17,10 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row">Slaughterhouse-Five</th>
-                <td>173</td>
-                <td>
-                    <button onclick="onReadBook(123)" class="read">Read</button>
-                    <button onclick="onUpdateBook(123)" class="update">Update</button>
-                    <button onclick="onDeleteBook(333)" class="delete">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Catch-22</th>
-                <td>120</td>
-                <td>
-                    <button onclick="onReadBook(234)" class="read">Read</button>
-                    <button onclick="onUpdateBook(123)" class="update">Update</button>
-                    <button onclick="onDeleteBook(333)" class="delete">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">The Sirens of Titan</th>
-                <td>200</td>
-                <td>
-                    <button onclick="onReadBook(333)" class="read">Read</button>
-                    <button onclick="onUpdateBook(123)" class="update">Update</button>
-                    <button onclick="onDeleteBook(333)" class="delete">Delete</button>
-                </td>
-            </tr>
+        <tbody class="book-list">
         </tbody>
     </table>
-<script src="js/bookshop.js"></script>
+    <script src="js/bookshop.js"></script>
 </body>
 
 </html>
