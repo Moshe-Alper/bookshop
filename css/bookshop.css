@@ -85,6 +85,12 @@ tbody>tr:nth-of-type(even) {
     background-color: orange;
 }
 
+/* .book-details {
+    padding: 10px;
+    background-color: lightblue;
+    border: 1px solid lightgray
+} */
+
 footer {
     /* display: flex;
     align-items: center; */

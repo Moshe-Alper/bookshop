@@ -38,3 +38,14 @@ function removeBook(bookId) {
     const idx = getBooks().findIndex(book => book.id === bookId)
     gBooks.splice(idx, 1)
 }
+
+function addBook(title, price) {
+    const book = {
+        id: 'tr4r4r',
+        title: title,
+        price: price,
+        imgUrl: 'lori-ipsi.jpg'
+    }
+    gBooks.unshift(book)
+    return book
+}

@@ -33,9 +33,12 @@ function onUpdateBook(bookId) {
 
 function onRemoveBook(bookId) {
     removeBook(bookId)
-    renderBookList()
+    renderBooks()
 }
 
 function onAddBook() {
-    console.log('hi');
+    const title = prompt('Book title?')
+    const price = +prompt('Book Price?')
+    addBook(title, price)
+    renderBooks()
 }
