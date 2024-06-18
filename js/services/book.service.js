@@ -5,21 +5,21 @@ var gBooks = [
         id: 'bg4J48',
         title: 'Slaughterhouse-Five',
         price: 173,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'book1.jpeg'
     },
 
     {
         id: 'cd4J38',
         title: 'Catch-22',
         price: 120,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'book2.jpg'
     },
 
     {
         id: 'fr4228',
         title: 'The Sirens of Titan',
         price: 200,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'book3.jpg'
     }
 ]
 
@@ -49,7 +49,7 @@ function addBook(title, price) {
         id: 'tr4r4r',
         title: title,
         price: price,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'book-cover-placeholder.png'
     }
     gBooks.unshift(book)
     return book

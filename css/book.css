@@ -57,6 +57,7 @@ td {
 }
 
 td button,
+.book-details button,
 .add {
     border: none;
     border-radius: 8px;
@@ -86,12 +87,15 @@ tbody>tr:nth-of-type(even) {
 }
 
 .book-details {
-    width: 80%;
-
     margin-block-start: 1.5em;
     padding-block-end: 1em;
+    padding-inline: 3em;
     text-align: center;
     background-color: lightblue;
+}
+
+.book-details img {
+    max-height: 30vh;
 }
 
 footer {

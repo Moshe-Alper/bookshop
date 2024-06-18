@@ -26,7 +26,9 @@ function onReadBook(bookId) {
     const elPre = document.querySelector('.book-details pre') 
 
     const book = getBookById(bookId)
-    elPre.innerText = book
+    const bookInfo = `<h3>${book.title}<h3>\n<img src="img/${book.imgUrl}">`
+    elPre.innerHTML = bookInfo
+    elDetails.showModal()
 }
 
 function onUpdateBook(bookId) {
@@ -41,7 +43,9 @@ function onRemoveBook(bookId) {
 
 function onAddBook() {
     const title = prompt('Book title?')
+    if (!title) return
     const price = +prompt('Book Price?')
+    if (!price) return
     addBook(title, price)
     renderBooks()
 }
