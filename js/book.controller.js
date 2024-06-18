@@ -13,7 +13,7 @@ function renderBooks() {
                 <td>${book.price}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
-                    <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
+                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update">Update</button>
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
             </tr>
@@ -21,7 +21,7 @@ function renderBooks() {
     elTableBody.innerHTML = strHtml.join('')
 }
 
-function onReadBook(bookId) {
+function onReadBook(bookId) { //toggle model
     const elDetails = document.querySelector('.book-details')
     const elPre = document.querySelector('.book-details pre') 
 
@@ -31,8 +31,12 @@ function onReadBook(bookId) {
     elDetails.showModal()
 }
 
-function onUpdateBook(bookId) {
-    updatePrice(bookId)
+
+
+function onUpdateBook(bookId, key) {
+    const book = getBookById(bookId)
+    const val = prompt(`Update the book ${key}:`, book[key])
+    updateBook(bookId, key, val)
     renderBooks()
 }
 

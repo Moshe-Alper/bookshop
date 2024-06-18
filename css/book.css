@@ -43,7 +43,7 @@ table {
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     font-size: 0.8rem;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625em;
 }
 
 thead {
@@ -98,6 +98,19 @@ tbody>tr:nth-of-type(even) {
     max-height: 30vh;
 }
 
+.filter {
+    width: 90vw;
+    padding-block: 1em;
+    margin-block-end: 1em;
+
+    border: .200em black solid;
+    background-color: lightcyan
+}
+
+.filter h2 {
+    margin: 0;
+    margin-inline-start: 1em;
+}
 footer {
     /* display: flex;
     align-items: center; */
