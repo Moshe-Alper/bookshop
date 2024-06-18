@@ -22,11 +22,14 @@ function renderBooks() {
 }
 
 function onReadBook(bookId) {
-    console.log(bookId)
+    const elDetails = document.querySelector('.book-details')
+    const elPre = document.querySelector('.book-details pre') 
+
+    const book = getBookById(bookId)
+    elPre.innerText = book
 }
 
 function onUpdateBook(bookId) {
-   
     updatePrice(bookId)
     renderBooks()
 }
