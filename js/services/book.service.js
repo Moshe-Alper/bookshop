@@ -1,27 +1,8 @@
 'use strict'
 
-var gBooks = [
-    {
-        id: 'bg4J48',
-        title: 'Slaughterhouse-Five',
-        price: 173,
-        imgUrl: 'book1.jpeg'
-    },
+var gBooks = []
 
-    {
-        id: 'cd4J38',
-        title: 'Catch-22',
-        price: 120,
-        imgUrl: 'book2.jpg'
-    },
-
-    {
-        id: 'fr4228',
-        title: 'The Sirens of Titan',
-        price: 200,
-        imgUrl: 'book3.jpg'
-    }
-]
+_createBooks()
 
 function getBooks() {
     return gBooks
@@ -53,4 +34,21 @@ function addBook(title, price) {
     }
     gBooks.unshift(book)
     return book
+}
+
+function _createBooks() {
+    gBooks = [
+        _createBook('Slaughterhouse-Five', 173, 'book1.jpeg'),
+        _createBook('Catch-22', 200, 'book2.jpg'),
+        _createBook('The Sirens of Titan', 120, 'book3.jpg'),
+    ]
+}
+
+function _createBook(title, price, imgUrl) {
+    return {
+        id: '1234',
+        title: title,
+        price: price,
+        imgUrl: imgUrl
+    }
 }
