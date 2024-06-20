@@ -9,38 +9,47 @@
 </head>
 
 <body onload="onInit()">
-        <header>
-            <h1>Book List</h1>
-        </header>
+    <header>
+        <h1>Book List</h1>
+    </header>
 
-        <main class="main-content">
-            <section class="filter">
-                <h2>Filter</h2>
-                This is filter section
-            </section>
-            <button onclick="onAddBook()" class="add">Add Book</button>
-            <table>
-                <thead>
-                    <th scope="col">Title</th> 
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                </thead>
-                <tbody class="book-list">
-                </tbody>
-            </table>
+    <main class="main-content">
+        <section class="filter">
+            <h2>Filter</h2>
+            This is filter section
+        </section>
+        <button onclick="onAddBook()" class="add">Add Book</button>
+        <table>
+            <thead>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody class="book-list">
+            </tbody>
+        </table>
 
-            <dialog class="book-details">
-                <form method="dialog">
-                    <pre></pre>
-                    <button autofocus>Close</button>
-                </form>
-            </dialog>
-        </main>
+        <dialog class="book-details">
+            <form method="dialog">
+                <div class="book-cover-img">
+                    <img src="" />
+                </div>
+
+                <div class="book-desc">
+                    <h3 class="title"></h3>
+                    <p class="desc"></p>
+
+                </div>
+
+                <button class="close">Close</button>
+            </form>
+        </dialog>
+    </main>
 
 
-        <footer>
-            <p>Coffee rights &copy;</p>
-        </footer>
+    <footer>
+        <p>Coffee rights &copy;</p>
+    </footer>
 
 
     <script src="js/services/util.service.js"></script>

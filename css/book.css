@@ -90,16 +90,50 @@ tbody>tr:nth-of-type(even) {
 }
 
 .book-details {
+    max-width: 75vw;
     margin-block-start: 1.5em;
     padding-block-end: 1em;
     padding-inline: 3em;
+    
     text-align: center;
+    border: 0;
+    border-radius: 1em;
+
     background-color: lightblue;
 }
 
-.book-details img {
-    max-height: 30vh;
+.book-details form {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
 }
+
+.book-details img {
+    max-height: 40vh;
+    flex-basis: 50%;
+}
+
+.book-desc {
+    flex-basis: 50%;
+}
+
+.book-desc .title {
+    font-size: 25px;
+    font-weight: 500;
+    color: grey;
+}
+
+.book-desc p {
+    display: block;
+    text-align: justify;
+}
+
+.close {
+    position: absolute;
+    bottom: .05em;
+ 
+}
+
 
 .filter {
     width: 90vw;

@@ -52,7 +52,8 @@ function _createBook(title, price, imgUrl) {
         id: `b${id}`,
         title: title,
         price: price,
-        imgUrl: imgUrl || 'book-cover-placeholder.png'
+        imgUrl: imgUrl || 'book-cover-placeholder.png',
+        desc: makeLorem(100)
     }
 }
 function _saveBooks() {

@@ -24,11 +24,13 @@ function renderBooks() {
 
 function onReadBook(bookId) { //toggle model
     const elDetails = document.querySelector('.book-details')
-    const elPre = document.querySelector('.book-details pre') 
-
     const book = getBookById(bookId)
-    const bookInfo = `<h3>${book.title}<h3>\n<img src="img/${book.imgUrl}">`
-    elPre.innerHTML = bookInfo
+
+    elDetails.querySelector(".book-cover-img img").src = `img/${book.imgUrl}`
+    elDetails.querySelector(".book-desc h3").innerText = book.title
+    elDetails.querySelector(".book-desc p").innerText = book.desc
+
+
     elDetails.showModal()
 }
 
