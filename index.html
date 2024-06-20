@@ -15,9 +15,15 @@
 
     <main class="main-content">
         <section class="filter">
-            <h2>Filter</h2>
-            This is filter section
+            <form>
+                <label> Search by title
+                    <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
+                        name="by-title" />
+                </label>
+            </form>
+            <button onclick="onResetFilter()" class="clear">Clear filters</button>
         </section>
+
         <button onclick="onAddBook()" class="add">Add Book</button>
         <table>
             <thead>

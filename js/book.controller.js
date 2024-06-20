@@ -62,3 +62,16 @@ function onAddBook() {
     addBook(title, price)
     renderBooks()
 }
+
+function onSetFilterBy(filterBy) {
+    setFilterBy(filterBy)
+    renderBooks()
+}
+
+function onResetFilter() {
+    setFilterBy({ title: '' })
+    renderBooks()
+
+    const elTitle = document.querySelector(".book-title");
+    elTitle.value = ""
+}

@@ -57,7 +57,8 @@ td {
 
 td button,
 .book-details button,
-.add {
+.add, .clear
+{
     border: none;
     border-radius: 8px;
     padding: 6px 12px;
@@ -128,12 +129,14 @@ tbody>tr:nth-of-type(even) {
     text-align: justify;
 }
 
+.clear {
+    background-color: red;
+}
 .close {
     position: absolute;
     bottom: .05em;
  
 }
-
 
 .filter {
     width: 90vw;
@@ -144,10 +147,10 @@ tbody>tr:nth-of-type(even) {
     background-color: lightcyan
 }
 
-.filter h2 {
-    margin: 0;
+.filter label {
     margin-inline-start: 1em;
 }
+
 footer {
     padding: .25em;
     

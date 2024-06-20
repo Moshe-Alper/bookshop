@@ -1,11 +1,22 @@
 'use strict'
 
 var gBooks = []
+var gFilterBy = ''
 
 _createBooks()
 
+var gFilterBy = {
+    title: ''
+}
+
+function setFilterBy(filterBy) {
+    if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
+}
+
 function getBooks() {
-    return gBooks
+    const books = gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.title)
+)
+    return books
 }
 
 function getBookById(bookId) {
@@ -59,3 +70,4 @@ function _createBook(title, price, imgUrl) {
 function _saveBooks() {
     saveToStorage('books', gBooks)
 }
+
