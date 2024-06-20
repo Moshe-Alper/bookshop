@@ -13,9 +13,9 @@ function getBookById(bookId) {
     return book
 }
 
-function updateBook(bookId, key, val) {
+function updateBook(bookId, key, value) {
     const bookIdx = gBooks.findIndex(book => book.id == bookId)
-    gBooks[bookIdx][key] = val
+    gBooks[bookIdx][key] = value
 //
     _saveBooks()
 }
@@ -39,20 +39,20 @@ function _createBooks() {
     if (gBooks && gBooks.length > 0) return
 
     gBooks = [
-        _createBook('Slaughterhouse-Five', 173, 'book1.jpeg'),
-        _createBook('Catch-22', 200, 'book2.jpg'),
-        _createBook('The Sirens of Titan', 120, 'book3.jpg'),
+        _createBook('Slaughterhouse-Five', 70, 'book1.jpeg'),
+        _createBook('Catch-22', 50, 'book2.jpg'),
+        _createBook('The Sirens of Titan', 65, 'book3.jpg'),
     ]
     _saveBooks()
 }
 
-function _createBook(title, price, imgUrl = 'book-cover-placeholder.png') {
+function _createBook(title, price, imgUrl) {
     const id = makeid()
     return {
         id: `b${id}`,
         title: title,
         price: price,
-        imgUrl: imgUrl
+        imgUrl: imgUrl || 'book-cover-placeholder.png'
     }
 }
 function _saveBooks() {

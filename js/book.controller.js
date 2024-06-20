@@ -10,10 +10,11 @@ function renderBooks() {
     const strHtml = getBooks().map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
-                <td>${book.price}</td>
+                <td>${formatPrice(book.price)}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
-                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update">Update</button>
+                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
+                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update-price">Update Price</button>
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
             </tr>
@@ -35,8 +36,14 @@ function onReadBook(bookId) { //toggle model
 
 function onUpdateBook(bookId, key) {
     const book = getBookById(bookId)
-    const val = prompt(`Update the book ${key}:`, book[key])
-    updateBook(bookId, key, val)
+    const currValue = book[key]
+    var value = prompt(`Current ${key}: ${currValue}. Update the book's ${key}:`)
+
+    if (typeof book[key] === "number") {
+        value = parseInt(value)
+    }
+
+    updateBook(bookId, key, value)
     renderBooks()
 }
 

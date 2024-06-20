@@ -77,7 +77,11 @@ tbody>tr:nth-of-type(even) {
     background-color: lightskyblue;
 }
 
-.update {
+.update-title {
+    background-color: purple;
+}
+
+.update-price {
     background-color: yellow;
 }
 
