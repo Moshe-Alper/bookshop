@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+:root {
+    --clr-background: 45, 100%, 98%;
+    --clr-header-footer: 210, 89%, 28%;
+    --clr-one: 74, 32%, 32%;
+    --clr-two: 16, 97%, 53%;
+    --clr-table: 254, 6%, 41%;
+    --clr-six: 152, 100%, 3%;
+    --clr-control: 217, 100%, 56%;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -10,12 +20,15 @@ body {
     min-height: 100vh;    
 
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: hsl(var(--clr-background));
 }
 
+header, footer {
+    background-color: hsl(var(--clr-header-footer));
+}
 
 header {
     padding: 0.5em;
-    background-color: lightblue;
     margin-block-end: 1em;
 
     text-align: center;
@@ -46,7 +59,7 @@ table {
 }
 
 thead {
-    background-color: rgb(163, 168, 171);
+    background-color: hsl(var(--clr-table));
 }
 
 th,
@@ -67,7 +80,7 @@ td {
 
 
     border: .200em black solid;
-    background-color: lightcyan
+    background-color: hsl(var(--clr-control))
 }
 
 .library-control label {
@@ -159,9 +172,7 @@ tbody>tr:nth-of-type(even) {
 
 footer {
     padding: .25em;
-    
     text-align: center;
-    background-color: lightblue;
 }
 
 .user-msg {

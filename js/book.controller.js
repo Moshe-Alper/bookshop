@@ -58,11 +58,12 @@ function onRemoveBook(bookId) {
 
 function onAddBook() {
     const title = prompt('Book title?')
-    if (!title) return
     const price = +prompt('Book Price?')
-    if (!price) return
+    if (!title || !price || price <= 0 || isNaN(price) ) {
+        return alert('Book title cannot be blank and book price must be a positive number. Please enter valid values.')
+    }
     
-    addBook(title, price)
+    addBook(capitalizeFirstLetterOfEachWord(title), price)
     flashMsg('Book Added')
     renderBooks()
 }

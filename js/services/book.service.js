@@ -14,8 +14,7 @@ function setFilterBy(filterBy) {
 }
 
 function getBooks() {
-    const books = gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.title)
-)
+    const books = gBooks.filter(book => book.title.includes(gFilterBy.title))
     return books
 }
 

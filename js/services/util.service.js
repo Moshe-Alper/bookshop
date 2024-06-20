@@ -53,3 +53,7 @@ function makeLorem(wordCount = 100) {
 function formatPrice(price) {
     return `$${price.toFixed(2)}`
 }
+
+function capitalizeFirstLetterOfEachWord(str) {
+	return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+}
