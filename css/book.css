@@ -148,7 +148,7 @@ tbody>tr:nth-of-type(even) {
 }
 
 .clear {
-    background-color: red;
+    background-color: lightgrey;
 }
 
 .close {
@@ -157,10 +157,22 @@ tbody>tr:nth-of-type(even) {
  
 }
 
-
 footer {
     padding: .25em;
     
     text-align: center;
     background-color: lightblue;
+}
+
+.user-msg {
+    position: fixed;
+    bottom: -100px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+.user-msg.open {
+    bottom: 10px;
+    transition: bottom .5s;
 }

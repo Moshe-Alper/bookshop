@@ -46,11 +46,13 @@ function onUpdateBook(bookId, key) {
     }
 
     updateBook(bookId, key, value)
+    flashMsg('Updated')
     renderBooks()
 }
 
 function onRemoveBook(bookId) {
     removeBook(bookId)
+    flashMsg('Book Deleted')
     renderBooks()
 }
 
@@ -59,7 +61,9 @@ function onAddBook() {
     if (!title) return
     const price = +prompt('Book Price?')
     if (!price) return
+    
     addBook(title, price)
+    flashMsg('Book Added')
     renderBooks()
 }
 
@@ -74,4 +78,13 @@ function onResetFilter() {
 
     const elTitle = document.querySelector(".book-title");
     elTitle.value = ""
+}
+
+function flashMsg(msg) {
+    const el = document.querySelector('.user-msg')
+    el.innerText = msg
+    el.classList.add('open')
+    setTimeout(() =>{
+        el.classList.remove('open')
+    }, 2000)
 }
