@@ -55,6 +55,24 @@ td {
     padding: 8px 10px;
 }
 
+.library-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    gap: 1em;
+
+    width: 90vw;
+    padding-block: 1em;
+    margin-block-end: 1em;
+
+
+    border: .200em black solid;
+    background-color: lightcyan
+}
+
+.library-control label {
+    margin-inline-start: 1em;
+}
 td button,
 .book-details button,
 .add, .clear
@@ -68,8 +86,8 @@ td button,
 
 .add {
     background-color: greenyellow;
-    margin-block-end: 8px;
 }
+
 tbody>tr:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
@@ -132,24 +150,13 @@ tbody>tr:nth-of-type(even) {
 .clear {
     background-color: red;
 }
+
 .close {
     position: absolute;
     bottom: .05em;
  
 }
 
-.filter {
-    width: 90vw;
-    padding-block: 1em;
-    margin-block-end: 1em;
-
-    border: .200em black solid;
-    background-color: lightcyan
-}
-
-.filter label {
-    margin-inline-start: 1em;
-}
 
 footer {
     padding: .25em;

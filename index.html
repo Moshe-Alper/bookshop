@@ -14,17 +14,17 @@
     </header>
 
     <main class="main-content">
-        <section class="filter">
+        <section class="library-control">
             <form>
-                <label> Search by title
+                <label> Search by title:
                     <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
                         name="by-title" />
                 </label>
             </form>
             <button onclick="onResetFilter()" class="clear">Clear filters</button>
+            <button onclick="onAddBook()" class="add">Add Book</button>
         </section>
 
-        <button onclick="onAddBook()" class="add">Add Book</button>
         <table>
             <thead>
                 <th scope="col">Title</th>
