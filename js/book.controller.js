@@ -4,7 +4,18 @@ function onInit() {
     renderBooks()
 }
 
+var gLayout = 'table'
+
 function renderBooks() {
+    const books = getBooks()
+
+    if (gLayout === 'table') renderBooksTable(books)
+    else renderBooksCards(books)
+
+    renderStats()
+}
+
+function renderBooksTable(books) {
     const elTableBody = document.querySelector('.book-list')
 
     if (!getBooks().length) {
@@ -13,7 +24,7 @@ function renderBooks() {
         </tr>`
         return
     }
-    const strHTMLs = getBooks().map(book => `
+    const strHTMLs = books.map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
@@ -25,13 +36,16 @@ function renderBooks() {
                 </td>
             </tr>
         `)
+
+    document.querySelector(".cards-container ").style.display = 'none'
+
     elTableBody.innerHTML = strHTMLs.join('')
-    renderStats()
+    document.querySelector("table").style.display = 'table'
 }
-renderBooksCards()
-function renderBooksCards() {
+
+function renderBooksCards(books) {
     const elCardsContainer = document.querySelector('.cards-container')
-    const strHTMLs = getBooks().map(book => `<article class="card-preview">
+    const strHTMLs = books.map(book => `<article class="card-preview">
                 <img src="img/book2.jpg" />
                 <h5>${book.title}</h5>
                 <p>${makeLorem(6)}</p>
@@ -42,9 +56,16 @@ function renderBooksCards() {
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
             </article>          
             `)
+    document.querySelector("table").style.display = 'none'
 
     elCardsContainer.innerHTML = strHTMLs.join('')
+    document.querySelector(".cards-container ").style.display = "flex"
 }
+
+function onSetLayout(layout) {
+    gLayout = layout
+    renderBooks()
+  }
 
 function onReadBook(bookId) { 
     const elDetails = document.querySelector('.book-details')
@@ -57,7 +78,6 @@ function onReadBook(bookId) {
 
     elDetails.showModal()
 }
-
 
 
 function onUpdateBook(bookId, key) {
