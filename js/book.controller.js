@@ -7,7 +7,13 @@ function onInit() {
 function renderBooks() {
     const elTableBody = document.querySelector('.book-list')
 
-    const strHtml = getBooks().map(book => `
+    if (!getBooks().length) {
+        elTableBody.innerHTML = `<tr>
+        <td colspan="4">No matching books were found...</td>
+        </tr>`
+        return
+    }
+    const strHTMLs = getBooks().map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
@@ -19,11 +25,28 @@ function renderBooks() {
                 </td>
             </tr>
         `)
-    elTableBody.innerHTML = strHtml.join('')
+    elTableBody.innerHTML = strHTMLs.join('')
     renderStats()
 }
+renderBooksCards()
+function renderBooksCards() {
+    const elCardsContainer = document.querySelector('.cards-container')
+    const strHTMLs = getBooks().map(book => `<article class="card-preview">
+                <img src="img/book2.jpg" />
+                <h5>${book.title}</h5>
+                <p>${makeLorem(6)}</p>
+                <h6>${formatPrice(book.price)}<h6>
+                <button onclick="onReadBook('${book.id}')" class="read">Read</button>
+                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
+                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update-price">Update Price</button>
+                    <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
+            </article>          
+            `)
 
-function onReadBook(bookId) { //toggle model
+    elCardsContainer.innerHTML = strHTMLs.join('')
+}
+
+function onReadBook(bookId) { 
     const elDetails = document.querySelector('.book-details')
     const book = getBookById(bookId)
 

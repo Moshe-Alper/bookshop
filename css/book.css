@@ -204,3 +204,22 @@ footer {
     text-align: center;
 }
 
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.2em;
+}
+
+.cards-container article {
+    background-color: hsl(var(--clr-background));
+    width: 20vw;
+    padding: 1em;
+    border: 1px solid hsl(var(--clr-black));
+    border-radius: 0.5em;
+    text-align: center;
+    
+}
+
+.cards-container img {
+    max-width: 75%;
+}
