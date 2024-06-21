@@ -20,6 +20,7 @@ function renderBooks() {
             </tr>
         `)
     elTableBody.innerHTML = strHtml.join('')
+    renderStats()
 }
 
 function onReadBook(bookId) { //toggle model
@@ -88,4 +89,20 @@ function flashMsg(msg) {
     setTimeout(() =>{
         el.classList.remove('open')
     }, 2000)
+}
+
+function renderStats() {
+    const elStats = document.querySelector('footer .stats')
+
+    const elExpensive = elStats.querySelector('.expensive')
+    const elAverage = elStats.querySelector('.average')
+    const elCheap = elStats.querySelector('.cheap')
+    
+    const expensive =getExpensiveBooksCount()
+    const average = getAverageBooksCount()
+    const cheap = getCheapBooksCount()
+
+    elExpensive.innerText = expensive
+    elAverage.innerText = average
+    elCheap.innerText = cheap
 }

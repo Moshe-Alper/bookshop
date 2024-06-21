@@ -51,7 +51,10 @@ function _createBooks() {
     gBooks = [
         _createBook('Slaughterhouse-Five', 70, 'book1.jpeg'),
         _createBook('Catch-22', 50, 'book2.jpg'),
-        _createBook('The Sirens of Titan', 65, 'book3.jpg'),
+        _createBook('The Sirens of Titan', 120, 'book3.jpg'),
+        _createBook('If We Were Villains', 230),
+        _createBook('The Likeness', 250),
+        _createBook('Black Chalk', 20),
     ]
     _saveBooks()
 }
@@ -70,3 +73,14 @@ function _saveBooks() {
     saveToStorage('books', gBooks)
 }
 
+function getExpensiveBooksCount() {
+    return gBooks.filter(book => book.price > 200).length
+}
+
+function getAverageBooksCount() {
+    return gBooks.filter(book => book.price > 80 && book.price < 200).length
+}
+
+function getCheapBooksCount() {
+    return gBooks.filter(book => book.price < 80).length
+}
