@@ -76,7 +76,9 @@ function onReadBook(bookId) {
     elDetails.querySelector(".book-cover-img img").src = `img/${book.imgUrl}`
     elDetails.querySelector(".book-desc h3").innerText = book.title
     elDetails.querySelector(".book-desc p").innerText = book.desc
+    elDetails.querySelector(".rate").innerText = book.rating
 
+    elDetails.dataset.bookId = bookId
 
     elDetails.showModal()
 }
@@ -97,6 +99,7 @@ function onUpdateBook(bookId, key) {
 }
 
 function onRemoveBook(bookId) {
+    if (!confirm('Are you sure you want to delete book?')) return
     removeBook(bookId)
     flashMsg('Book Deleted')
     renderBooks()
@@ -170,3 +173,12 @@ function renderStats() {
     elAverage.innerText = average
     elCheap.innerText = cheap
 }
+
+function onUpdateRating(ev, diff) {
+    ev.preventDefault()
+    const elDetails = document.querySelector(".book-details")
+  
+    const bookId = elDetails.dataset.bookId
+    const book = updateRating(bookId, +diff)
+    elDetails.querySelector(".rate").innerText = book.rating
+  }

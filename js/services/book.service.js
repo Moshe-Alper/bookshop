@@ -66,7 +66,8 @@ function _createBook(title, price, imgUrl) {
         title: title,
         price: price,
         imgUrl: imgUrl || 'book-cover-placeholder.png',
-        desc: makeLorem(100)
+        desc: makeLorem(100),
+        rating: 0
     }
 }
 function _saveBooks() {
@@ -83,4 +84,14 @@ function getAverageBooksCount() {
 
 function getCheapBooksCount() {
     return gBooks.filter(book => book.price < 80).length
+}
+
+function updateRating(bookId, diff) {
+    const book = getBookById(bookId)
+    const newRating = book.rating + diff
+    if (newRating >= 0 && newRating <= 5) {
+        book.rating = newRating
+        _saveBooks()
+    }
+    return book
 }

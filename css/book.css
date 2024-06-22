@@ -94,7 +94,8 @@ td button,
 .cards-container button,
 .add, .clear,
 .library-control button,
-.add-book button
+.add-book button, 
+.rate
 {
     border: none;
     border-radius: 8px;
