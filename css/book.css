@@ -93,7 +93,8 @@ td button,
 .book-details button,
 .cards-container button,
 .add, .clear,
-.library-control button
+.library-control button,
+.add-book button
 {
     border: none;
     border-radius: 8px;
@@ -126,8 +127,10 @@ tbody>tr:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
 
-.book-details {
+.book-details,
+.add-book {
     max-width: 75vw;
+    min-height: 50vw;
     margin-block-start: 1.5em;
     padding-block-end: 1em;
     padding-inline: 3em;
@@ -139,8 +142,17 @@ tbody>tr:nth-of-type(even) {
     background-color: lightblue;
 }
 
-.book-details form {
+.book-details form
+{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.add-book form {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 2em;
 }
@@ -241,3 +253,18 @@ footer {
 .cards-container img {
     max-width: 75%;
 }
+
+ 
+input {
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: hsl(var(--clr-black));
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+  }
+
+  input::placeholder {
+    color: hsl(var(--clr-table));
+  }

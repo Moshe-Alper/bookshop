@@ -114,10 +114,29 @@ function onAddBook() {
     renderBooks()
 }
 
+function onAddBookModal(elForm) {
+    const title = elForm.querySelector("input[name=book-title]").value
+    const price = +elForm.querySelector("input[name=book-price]").value
+
+    if (!title || !price || price <= 0 || isNaN(price) ) {
+        return alert('Book title cannot be blank and book price must be a positive number. Please enter valid values.')
+    }
+     
+    addBook(capitalizeFirstLetterOfEachWord(title), price)
+    flashMsg('Book Added')
+    renderBooks()
+}
+
 function onSetFilterBy(filterBy) {
     setFilterBy(filterBy)
     renderBooks()
 }
+
+function onOpenAddModal() {
+    const elAddBook = document.querySelector(".add-book")
+    elAddBook.showModal();
+  }
+  
 
 function onResetFilter() {
     setFilterBy({ title: '' })
