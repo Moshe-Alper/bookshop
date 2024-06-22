@@ -1,10 +1,11 @@
 'use strict'
 
+const LAYOUT_KEY = "layout_db"
+var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
+
 function onInit() {
     renderBooks()
 }
-
-var gLayout = 'table'
 
 function renderBooks() {
     const books = getBooks()
@@ -64,6 +65,7 @@ function renderBooksCards(books) {
 
 function onSetLayout(layout) {
     gLayout = layout
+    saveToStorage(LAYOUT_KEY, gLayout)
     renderBooks()
   }
 
