@@ -46,7 +46,7 @@ function renderBooksTable(books) {
 function renderBooksCards(books) {
     const elCardsContainer = document.querySelector('.cards-container')
     const strHTMLs = books.map(book => `<article class="card-preview">
-                <img src="img/book2.jpg" />
+                <img src="img/${book.imgUrl}" alt="${book.title}" />
                 <h5>${book.title}</h5>
                 <p>${makeLorem(6)}</p>
                 <h6>${formatPrice(book.price)}<h6>

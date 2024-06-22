@@ -91,7 +91,9 @@ td {
 
 td button,
 .book-details button,
-.add, .clear
+.cards-container button,
+.add, .clear,
+.library-control button
 {
     border: none;
     border-radius: 8px;
@@ -105,11 +107,12 @@ td button {
     padding-inline: 1.5em;
 }
 
-td button {
+td button, .cards-container button {
     background-color: hsl(var(--clr-btn));
 }
 
-td button:nth-of-type(even) {
+td button:nth-of-type(even),
+.cards-container button:nth-of-type(even) {
     background-color: hsl(var(--clr-btn2));
 ;
 }
@@ -207,17 +210,32 @@ footer {
 .cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap:1.2em;
+    min-width: 90vw;
+    gap:1rem;
+    justify-content: center;
+    align-content: start;
+    
+    margin: 0;
+    resize: both;
+    overflow: auto;
 }
 
 .cards-container article {
     background-color: hsl(var(--clr-background));
-    width: 20vw;
-    padding: 1em;
-    border: 1px solid hsl(var(--clr-black));
+    max-width: 20vw;
+    
+    padding: .5em;
+    border: .20em solid hsl(var(--clr-black));
     border-radius: 0.5em;
     text-align: center;
-    
+}
+
+.cards-container article:nth-of-type(even) {
+    background-color: rgb(237 238 242);
+}
+
+.cards-container button {
+    margin: 0.2em;
 }
 
 .cards-container img {
