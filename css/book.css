@@ -64,7 +64,17 @@ main.main-content {
 .filter {
     display: flex;
     gap: 1em;
-    flex-basis: 50%;
+    flex-basis: 70%;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.layout span {
+    font-weight: 600;
 }
 
 .actions {
@@ -161,18 +171,17 @@ td button:nth-of-type(even) {
 .cards-container {
     display: flex;
     flex-wrap: wrap;
-    min-width: 90vw;
-    gap: 1rem;
-    justify-content: center;
-    align-content: start;
-    margin: 0;
+    gap: 0.5em;
+    
+    margin-block: 1em;
+
     resize: both;
     overflow: auto;
 }
 
 .cards-container article {
     background-color: hsl(var(--clr-background));
-    max-width: 20vw;
+    flex-basis: 250px;
     padding: 0.5em;
     border: 0.2em solid hsl(var(--clr-black));
     border-radius: 0.5em;

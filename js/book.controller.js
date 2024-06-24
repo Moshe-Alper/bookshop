@@ -34,7 +34,7 @@ function renderBooksTable(books) {
                 <td>${book.rating}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
-                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update">Update</button>
+                    <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
             </tr>
@@ -55,9 +55,8 @@ function renderBooksCards(books) {
                 <h5>${formatPrice(book.price)}<h5>
                 <h6>Rating: ${book.rating}</h6>
                 <button onclick="onReadBook('${book.id}')" class="read">Read</button>
-                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
-                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update-price">Update Price</button>
-                    <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
+                <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
+                <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
             </article>          
             `)
     document.querySelector("table").style.display = 'none'
@@ -111,7 +110,6 @@ function onReadBook(bookId) {
 // }
 
 function onUpdateBook(bookId) {
-    gBookToEdit = null
     resetBookEditModal()
 
     const elModal = document.querySelector('.book-edit-modal')
@@ -136,8 +134,6 @@ function onAddBook() {
 }
 
 function onSaveBook() {
-    gBookToEdit = null
-
     const elForm = document.querySelector('.book-edit-modal form')
     
     const elTitle = elForm.querySelector("input[name=book-title]")
@@ -145,6 +141,12 @@ function onSaveBook() {
 
     const title = elTitle.value
     const price = parseFloat(elPrice.value)
+
+
+    if (!title || isNaN(price)) {
+        flashMsg("Please enter a valid title and price.")
+        return
+    }
 
     if(gBookToEdit) {
         var book = updateBook(gBookToEdit.id, title, price)
@@ -156,7 +158,8 @@ function onSaveBook() {
 
     }
 
-    
+    gBookToEdit = null
+
     resetBookEditModal()
     renderBooks()
 }
@@ -174,18 +177,6 @@ function onCloseBookEditModal() {
     resetBookEditModal()
 }
 
-function onSetFilterBy(filterBy) {
-    setFilterBy(filterBy)
-    renderBooks()
-}
-
-function onResetFilter() {
-    setFilterBy({ title: '' })
-    renderBooks()
-
-    const elTitle = document.querySelector(".book-title");
-    elTitle.value = ''
-}
 
 function renderStats() {
     const elStats = document.querySelector('footer .stats')
@@ -201,6 +192,19 @@ function renderStats() {
     elExpensive.innerText = expensive
     elAverage.innerText = average
     elCheap.innerText = cheap
+}
+
+function onSetFilterBy(filterBy) {
+    setFilterBy(filterBy)
+    renderBooks()
+}
+
+function onResetFilter() {
+    setFilterBy({ title: '' })
+    renderBooks()
+
+    const elTitle = document.querySelector(".book-title");
+    elTitle.value = ''
 }
 
 function onUpdateRating(ev, diff) {

@@ -6,7 +6,7 @@ var gFilterBy = ''
 _createBooks()
 
 function getBooks() {
-    const books = gBooks.filter(book => book.title.includes(gFilterBy.title))
+    const books = gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.title.toLowerCase()))
     return books
 }
 

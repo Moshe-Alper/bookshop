@@ -21,18 +21,36 @@
                         <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
                             name="by-title" />
                     </label>
+
+                    <label>
+                        Filter by rating:
+                        <select onchange="onSetFilterBy({ rating: this.value })" class="book-rating" name="by-rating">
+                            <option value="">Select rating</option>
+                            <option value="1">1 star</option>
+                            <option value="2">2 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="5">5 stars</option>
+                        </select>
+                    </label>
+                    
                 </form>
                 <button onclick="onResetFilter()" class="clear">Clear filters</button>
             </section>
-
-            <div class="actions">
-                <button onclick="onAddBook()" class="add">Add Book</button>
-                <span>Layout:</span>
-                <button onclick="onSetLayout('table')">Table</button>
-                <button onclick="onSetLayout('cards')">Cards</button>
-            </div>
+                <div class="layout">
+                    <span>Layout:</span>
+                    <button onclick="onSetLayout('table')"><i class="fa fa-table" aria-hidden="true"></i></button>
+                    <button onclick="onSetLayout('cards')"><i class="fa fa-th-list" aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+            </section>
             
-        </section>
+                        <div class="actions">
+                            <button onclick="onAddBook()" class="add">Add Book</button>
+                            <button>Back</button>
+                            <button>Next</button>
+                        </div>
 
         <table>
             <thead>
