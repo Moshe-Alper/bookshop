@@ -70,6 +70,7 @@ main.main-content {
 .actions {
     display: flex;
     gap: 1em;
+    justify-content: space-between;
 }
 
 table {

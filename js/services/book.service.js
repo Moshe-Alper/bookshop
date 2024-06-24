@@ -53,10 +53,19 @@ function addBook(title, price) {
     return book
 }
 
-function updateBook(bookId, key, value) {
-    const bookIdx = gBooks.findIndex(book => book.id == bookId)
-    gBooks[bookIdx][key] = value
+// function updateBook(bookId, key, value) {
+//     const bookIdx = gBooks.findIndex(book => book.id == bookId)
+//     gBooks[bookIdx][key] = value
     
+//     _saveBooksToStorage()
+//     return book
+// }
+
+function updateBook(bookId, newTitle, newPrice) {
+    const book = getBookById(bookId)
+    book.title = newTitle
+    book.price = newPrice
+
     _saveBooksToStorage()
     return book
 }

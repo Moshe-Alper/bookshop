@@ -3,6 +3,7 @@
 const LAYOUT_KEY =  'layoutDB'
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
+var gBookToEdit = null
 
 function onInit() {
     renderBooks()
@@ -33,8 +34,7 @@ function renderBooksTable(books) {
                 <td>${book.rating}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
-                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
-                    <button onclick="onUpdateBook('${book.id}', 'price')" class="update-price">Update Price</button>
+                    <button onclick="onUpdateBook('${book.id}', 'title')" class="update">Update</button>
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
             </tr>
@@ -94,28 +94,50 @@ function onReadBook(bookId) {
 }
 
 
-function onUpdateBook(bookId, key) {
+// function onUpdateBook(bookId, key) {
+//     const book = getBookById(bookId)
+//     const currValue = book[key]
+//     var value = prompt(`Current ${key}: ${currValue}. Update the book's ${key}:`)
+
+//     if (!value || currValue === value) return
+
+//     if (typeof book[key] === 'number') {
+//         value = parseInt(value)
+//     }
+
+//     updateBook(bookId, key, value)
+//     flashMsg('Updated')
+//     renderBooks()
+// }
+
+function onUpdateBook(bookId) {
+    gBookToEdit = null
+    resetBookEditModal()
+
+    const elModal = document.querySelector('.book-edit-modal')
+    const elForm = document.querySelector('.book-edit-modal form')
+    
+    const elTitle = elForm.querySelector("input[name=book-title]")
+    const elPrice = elForm.querySelector("input[name=book-price]")
+
     const book = getBookById(bookId)
-    const currValue = book[key]
-    var value = prompt(`Current ${key}: ${currValue}. Update the book's ${key}:`)
+    elTitle.value = book.title
+    elPrice.value = book.price
 
-    if (!value || currValue === value) return
-
-    if (typeof book[key] === "number") {
-        value = parseInt(value)
-    }
-
-    updateBook(bookId, key, value)
-    flashMsg('Updated')
-    renderBooks()
+    gBookToEdit = book
+    elModal.showModal()
 }
 
 function onAddBook() {
+    gBookToEdit = null
+    resetBookEditModal()
     const elModal = document.querySelector('.book-edit-modal')
     elModal.showModal()
 }
 
 function onSaveBook() {
+    gBookToEdit = null
+
     const elForm = document.querySelector('.book-edit-modal form')
     
     const elTitle = elForm.querySelector("input[name=book-title]")
@@ -124,14 +146,32 @@ function onSaveBook() {
     const title = elTitle.value
     const price = parseFloat(elPrice.value)
 
-    const book = addBook(title, price)
+    if(gBookToEdit) {
+        var book = updateBook(gBookToEdit.id, title, price)
+        flashMsg(`${book.title} Updated`)
+
+    } else {
+        var book = addBook(title, price)
+        flashMsg(`${book.title} Added`)
+
+    }
+
     
-    flashMsg('Book Added')
+    resetBookEditModal()
     renderBooks()
+}
+
+function resetBookEditModal() {
+    const elForm = document.querySelector('.book-edit-modal form')
+    elForm.querySelector("input[name=book-title]").value = ''
+    elForm.querySelector("input[name=book-price]").value = ''
+
 }
 
 function onCloseBookEditModal() {
     document.querySelector('.book-edit-modal').close()
+
+    resetBookEditModal()
 }
 
 function onSetFilterBy(filterBy) {
