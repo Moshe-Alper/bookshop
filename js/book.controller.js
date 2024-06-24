@@ -99,6 +99,8 @@ function onUpdateBook(bookId, key) {
     const currValue = book[key]
     var value = prompt(`Current ${key}: ${currValue}. Update the book's ${key}:`)
 
+    if (!value || currValue === value) return
+
     if (typeof book[key] === "number") {
         value = parseInt(value)
     }
@@ -108,23 +110,28 @@ function onUpdateBook(bookId, key) {
     renderBooks()
 }
 
-function onAddBook(elForm) {
-    const title = elForm.querySelector("input[name=book-title]").value
-    const price = +elForm.querySelector("input[name=book-price]").value
+function onAddBook() {
+    const elModal = document.querySelector('.book-edit-modal')
+    elModal.showModal()
+}
 
-    if (!title || !price || price <= 0 || isNaN(price) ) {
-        return alert('Book title cannot be blank and book price must be a positive number. Please enter valid values.')
-    }
-     
-    addBook(title, price)
+function onSaveBook() {
+    const elForm = document.querySelector('.book-edit-modal form')
+    
+    const elTitle = elForm.querySelector("input[name=book-title]")
+    const elPrice = elForm.querySelector("input[name=book-price]")
+
+    const title = elTitle.value
+    const price = parseFloat(elPrice.value)
+
+    const book = addBook(title, price)
+    
     flashMsg('Book Added')
     renderBooks()
 }
 
-
-function onOpenAddModal() {
-    const elAddBook = document.querySelector(".add-book")
-    elAddBook.showModal();
+function onCloseBookEditModal() {
+    document.querySelector('.book-edit-modal').close()
 }
 
 function onSetFilterBy(filterBy) {

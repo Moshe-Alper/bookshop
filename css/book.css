@@ -61,6 +61,17 @@ main.main-content {
     margin-inline-start: 1em;
 }
 
+.filter {
+    display: flex;
+    gap: 1em;
+    flex-basis: 50%;
+}
+
+.actions {
+    display: flex;
+    gap: 1em;
+}
+
 table {
     min-width: 90vw;
     text-align: center;
@@ -93,7 +104,7 @@ td button:nth-of-type(even) {
     background-color: hsl(var(--clr-btn2));
 }
 
-.book-details, .add-book {
+.book-details {
     width: 50vw;
     height: 60vh;
     margin-block-start: 1.5em;
@@ -114,7 +125,12 @@ td button:nth-of-type(even) {
     text-transform: capitalize;
 }
 
-.add-book form {
+.book-edit-modal {
+    background-color: hsl(var(--clr-control));
+    padding: 1em;
+}
+
+.book-edit-modal form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -214,7 +230,7 @@ td button,
 .cards-container button,
 .add, .clear,
 .library-control button,
-.add-book button, 
+.book-edit-modal button, 
 .rate {
     border: none;
     border-radius: 8px;

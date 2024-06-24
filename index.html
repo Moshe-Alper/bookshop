@@ -15,16 +15,22 @@
 
     <main class="main-content">
         <section class="library-control">
-            <form>
-                <label> Search by title:
-                    <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
-                        name="by-title" />
-                </label>
-            </form>
-            <button onclick="onResetFilter()" class="clear">Clear filters</button>
-            <button onclick="onOpenAddModal()" class="add">Add Book</button>
-            <button onclick="onSetLayout('table')">Table</button>
-            <button onclick="onSetLayout('cards')">Cards</button>
+            <section class="filter">
+                <form>
+                    <label> Search by title:
+                        <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
+                            name="by-title" />
+                    </label>
+                </form>
+                <button onclick="onResetFilter()" class="clear">Clear filters</button>
+            </section>
+
+            <div class="actions">
+                <button onclick="onAddBook()" class="add">Add Book</button>
+                <span>Layout:</span>
+                <button onclick="onSetLayout('table')">Table</button>
+                <button onclick="onSetLayout('cards')">Cards</button>
+            </div>
             
         </section>
 
@@ -84,26 +90,29 @@
         </section>
     </footer>
 
-    <div class="user-msg"></div>
-
-    <dialog class="add-book">
-        <h3>Add a book</h3>
-        <form method="dialog" onsubmit="onAddBookModal(this)">
-          <div>
-            <span>Title</span>
-            <input name="book-title" type="text" placeholder="Book Title" autocomplete="off" />
-          </div>
     
-          <div>
-            <span>Price</span>:
-            <input name="book-price" type="number" step=".01" placeholder="Book Price" autocomplete="off" />
-          </div>
-       
-          <button>Create Book</button>
-          <button>Close</button>
+    <dialog class="book-edit-modal">
+        <h3>Add a book</h3>
+        <form method="dialog" onsubmit="onSaveBook()">
+            <div>
+                <span>Title:</span>
+                <input name="book-title" type="text" placeholder="Book Title" autocomplete="off" />
+            </div>
+            
+            <div>
+                <span>Price</span>:
+                <input name="book-price" type="number" step=".01" placeholder="Book Price" autocomplete="off" />
+            </div>
+            
+            <div class="actions">
+                <button>Save</button>
+                <button onclick="onCloseBookEditModal()">Cancel</button>
+            </div>
+            
         </form>
-      </dialog>
-
+    </dialog>
+    
+    <div class="user-msg"></div>
 
     <script src="https://kit.fontawesome.com/2fcb60592b.js" crossorigin="anonymous"></script>
     <script src="js/services/util.service.js"></script>

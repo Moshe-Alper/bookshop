@@ -42,14 +42,14 @@ function removeBook(bookId) {
     const idx = getBooks().findIndex(book => book.id === bookId)
     gBooks.splice(idx, 1)
     
-    _saveBooks()
+    _saveBooksToStorage()
 }
 
 function addBook(title, price) {
     const book = _createBook(title, price)
     gBooks.unshift(book)
     
-    _saveBooks()
+    _saveBooksToStorage()
     return book
 }
 
@@ -57,7 +57,7 @@ function updateBook(bookId, key, value) {
     const bookIdx = gBooks.findIndex(book => book.id == bookId)
     gBooks[bookIdx][key] = value
     
-    _saveBooks()
+    _saveBooksToStorage()
     return book
 }
 
@@ -66,14 +66,14 @@ function updateRating(bookId, diff) {
     const newRating = book.rating + diff
     if (newRating >= 0 && newRating <= 5) {
         book.rating = newRating
-        _saveBooks()
+        _saveBooksToStorage()
     }
     return book
 }
 
 function _createBooks() {
     gBooks = loadFromStorage('books')
-    if (gBooks && gBooks.length > 0) return
+    if (gBooks && gBooks.length) return
 
     gBooks = [
         _createBook('Slaughterhouse-Five', 70, 'book1.jpeg'),
@@ -83,7 +83,7 @@ function _createBooks() {
         _createBook('The Likeness', 250),
         _createBook('Black Chalk', 20),
     ]
-    _saveBooks()
+    _saveBooksToStorage()
 }
 
 function _createBook(title, price, imgUrl) {
@@ -98,6 +98,6 @@ function _createBook(title, price, imgUrl) {
     }
 }
 
-function _saveBooks() {
+function _saveBooksToStorage() {
     saveToStorage('books', gBooks)
 }
