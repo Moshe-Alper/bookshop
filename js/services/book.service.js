@@ -5,6 +5,11 @@ var gFilterBy = ''
 
 _createBooks()
 
+function getBooks() {
+    const books = gBooks.filter(book => book.title.includes(gFilterBy.title))
+    return books
+}
+
 var gFilterBy = {
     title: ''
 }
@@ -13,35 +18,57 @@ function setFilterBy(filterBy) {
     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
 }
 
-function getBooks() {
-    const books = gBooks.filter(book => book.title.includes(gFilterBy.title))
-    return books
-}
 
 function getBookById(bookId) {
     const book = gBooks.find(book => book.id === bookId)
     return book
 }
 
-function updateBook(bookId, key, value) {
-    const bookIdx = gBooks.findIndex(book => book.id == bookId)
-    gBooks[bookIdx][key] = value
-//
-    _saveBooks()
+
+function getExpensiveBooksCount() {
+    return gBooks.filter(book => book.price > 200).length
 }
+
+function getAverageBooksCount() {
+    return gBooks.filter(book => book.price > 80 && book.price < 200).length
+}
+
+function getCheapBooksCount() {
+    return gBooks.filter(book => book.price < 80).length
+}
+
 
 function removeBook(bookId) {
     const idx = getBooks().findIndex(book => book.id === bookId)
     gBooks.splice(idx, 1)
-
+    
     _saveBooks()
 }
 
 function addBook(title, price) {
     const book = _createBook(title, price)
     gBooks.unshift(book)
-
+    
     _saveBooks()
+    return book
+}
+
+function updateBook(bookId, key, value) {
+    const bookIdx = gBooks.findIndex(book => book.id == bookId)
+    gBooks[bookIdx][key] = value
+    
+    _saveBooks()
+    return book
+}
+
+function updateRating(bookId, diff) {
+    const book = getBookById(bookId)
+    const newRating = book.rating + diff
+    if (newRating >= 0 && newRating <= 5) {
+        book.rating = newRating
+        _saveBooks()
+    }
+    return book
 }
 
 function _createBooks() {
@@ -70,28 +97,7 @@ function _createBook(title, price, imgUrl) {
         rating: 0
     }
 }
+
 function _saveBooks() {
     saveToStorage('books', gBooks)
-}
-
-function getExpensiveBooksCount() {
-    return gBooks.filter(book => book.price > 200).length
-}
-
-function getAverageBooksCount() {
-    return gBooks.filter(book => book.price > 80 && book.price < 200).length
-}
-
-function getCheapBooksCount() {
-    return gBooks.filter(book => book.price < 80).length
-}
-
-function updateRating(bookId, diff) {
-    const book = getBookById(bookId)
-    const newRating = book.rating + diff
-    if (newRating >= 0 && newRating <= 5) {
-        book.rating = newRating
-        _saveBooks()
-    }
-    return book
 }

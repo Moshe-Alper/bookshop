@@ -1,6 +1,7 @@
 'use strict'
 
-const LAYOUT_KEY = "layout_db"
+const LAYOUT_KEY =  'layoutDB'
+
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
 
 function onInit() {
@@ -63,6 +64,13 @@ function renderBooksCards(books) {
     document.querySelector(".cards-container ").style.display = "flex"
 }
 
+function onRemoveBook(bookId) {
+    if (!confirm('Are you sure you want to delete book?')) return
+    removeBook(bookId)
+    flashMsg('Book Deleted')
+    renderBooks()
+}
+
 function onSetLayout(layout) {
     gLayout = layout
     saveToStorage(LAYOUT_KEY, gLayout)
@@ -98,26 +106,7 @@ function onUpdateBook(bookId, key) {
     renderBooks()
 }
 
-function onRemoveBook(bookId) {
-    if (!confirm('Are you sure you want to delete book?')) return
-    removeBook(bookId)
-    flashMsg('Book Deleted')
-    renderBooks()
-}
-
-function onAddBook() {
-    const title = prompt('Book title?')
-    const price = +prompt('Book Price?')
-    if (!title || !price || price <= 0 || isNaN(price) ) {
-        return alert('Book title cannot be blank and book price must be a positive number. Please enter valid values.')
-    }
-    
-    addBook(capitalizeFirstLetterOfEachWord(title), price)
-    flashMsg('Book Added')
-    renderBooks()
-}
-
-function onAddBookModal(elForm) {
+function onAddBook(elForm) {
     const title = elForm.querySelector("input[name=book-title]").value
     const price = +elForm.querySelector("input[name=book-price]").value
 
@@ -125,9 +114,15 @@ function onAddBookModal(elForm) {
         return alert('Book title cannot be blank and book price must be a positive number. Please enter valid values.')
     }
      
-    addBook(capitalizeFirstLetterOfEachWord(title), price)
+    addBook(title, price)
     flashMsg('Book Added')
     renderBooks()
+}
+
+
+function onOpenAddModal() {
+    const elAddBook = document.querySelector(".add-book")
+    elAddBook.showModal();
 }
 
 function onSetFilterBy(filterBy) {
@@ -135,32 +130,17 @@ function onSetFilterBy(filterBy) {
     renderBooks()
 }
 
-function onOpenAddModal() {
-    const elAddBook = document.querySelector(".add-book")
-    elAddBook.showModal();
-  }
-  
-
 function onResetFilter() {
     setFilterBy({ title: '' })
     renderBooks()
 
     const elTitle = document.querySelector(".book-title");
-    elTitle.value = ""
-}
-
-function flashMsg(msg) {
-    const el = document.querySelector('.user-msg')
-    el.innerText = msg
-    el.classList.add('open')
-    setTimeout(() =>{
-        el.classList.remove('open')
-    }, 2000)
+    elTitle.value = ''
 }
 
 function renderStats() {
     const elStats = document.querySelector('footer .stats')
-
+    
     const elExpensive = elStats.querySelector('.expensive')
     const elAverage = elStats.querySelector('.average')
     const elCheap = elStats.querySelector('.cheap')
@@ -168,7 +148,7 @@ function renderStats() {
     const expensive =getExpensiveBooksCount()
     const average = getAverageBooksCount()
     const cheap = getCheapBooksCount()
-
+    
     elExpensive.innerText = expensive
     elAverage.innerText = average
     elCheap.innerText = cheap
@@ -177,8 +157,15 @@ function renderStats() {
 function onUpdateRating(ev, diff) {
     ev.preventDefault()
     const elDetails = document.querySelector(".book-details")
-  
+    
     const bookId = elDetails.dataset.bookId
     const book = updateRating(bookId, +diff)
     elDetails.querySelector(".rate").innerText = book.rating
-  }
+}
+
+function flashMsg(msg) {
+    const el = document.querySelector('.user-msg')
+    el.innerText = msg
+    el.classList.add('open')
+    setTimeout(() => el.classList.remove('open'), 2000)
+}
