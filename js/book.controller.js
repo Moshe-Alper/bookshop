@@ -30,6 +30,7 @@ function renderBooksTable(books) {
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
+                <td>${book.rating}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
                     <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
@@ -49,9 +50,10 @@ function renderBooksCards(books) {
     const elCardsContainer = document.querySelector('.cards-container')
     const strHTMLs = books.map(book => `<article class="card-preview">
                 <img src="img/${book.imgUrl}" alt="${book.title}" />
-                <h5>${book.title}</h5>
-                <p>${makeLorem(6)}</p>
-                <h6>${formatPrice(book.price)}<h6>
+                <h4>${book.title}</h4>
+                <p>${makeLorem(20)}</p>
+                <h5>${formatPrice(book.price)}<h5>
+                <h6>Rating: ${book.rating}</h6>
                 <button onclick="onReadBook('${book.id}')" class="read">Read</button>
                     <button onclick="onUpdateBook('${book.id}', 'title')" class="update-title">Update Title</button>
                     <button onclick="onUpdateBook('${book.id}', 'price')" class="update-price">Update Price</button>

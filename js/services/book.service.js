@@ -87,14 +87,14 @@ function _createBooks() {
 }
 
 function _createBook(title, price, imgUrl) {
-    const id = makeid()
+    const id = makeId()
     return {
         id: `b${id}`,
         title: title,
         price: price,
         imgUrl: imgUrl || 'book-cover-placeholder.png',
         desc: makeLorem(100),
-        rating: 0
+        rating: getRandomInt(1, 5)
     }
 }
 
