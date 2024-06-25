@@ -1,18 +1,21 @@
 'use strict'
 
-var gBooks = []
-var gFilterBy = ''
+var gBooks 
 
 _createBooks()
 
-function getBooks() {
-    const books = gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy.title.toLowerCase()))
+function getBooks(options = {}) {
+    const filterBy = options.filterBy
+    var books = gBooks
+
+    if(filterBy.title) books = books.filter(book => book.title.toLowerCase().includes(filterBy.title.toLowerCase()))
+    if(filterBy.rating) books = books.filter(book => book.rating >= filterBy.rating)
     return books
 }
 
-var gFilterBy = {
-    title: ''
-}
+// var gFilterBy = {
+//     title: ''
+// }
 
 function setFilterBy(filterBy) {
     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
@@ -39,7 +42,7 @@ function getCheapBooksCount() {
 
 
 function removeBook(bookId) {
-    const idx = getBooks().findIndex(book => book.id === bookId)
+    const idx = gBooks.findIndex(book => book.id === bookId)
     gBooks.splice(idx, 1)
     
     _saveBooksToStorage()

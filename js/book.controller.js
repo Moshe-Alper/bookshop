@@ -2,6 +2,12 @@
 
 const LAYOUT_KEY =  'layoutDB'
 
+var gQueryOptions = {
+    filterBy: { TextTrack: '', rating: 0 },
+    sortBy: {},
+}
+
+
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
 var gBookToEdit = null
 
@@ -10,7 +16,7 @@ function onInit() {
 }
 
 function renderBooks() {
-    const books = getBooks()
+    const books = getBooks(gQueryOptions)
 
     if (gLayout === 'table') renderBooksTable(books)
     else renderBooksCards(books)
@@ -21,13 +27,13 @@ function renderBooks() {
 function renderBooksTable(books) {
     const elTableBody = document.querySelector('.book-list')
 
-    if (!getBooks().length) {
+    if (!books.length) {
         elTableBody.innerHTML = `<tr>
         <td colspan="4">No matching books were found...</td>
         </tr>`
         return
     }
-    const strHTMLs = books.map(book => `
+    const strHTMLs = gBooks.map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
@@ -194,18 +200,6 @@ function renderStats() {
     elCheap.innerText = cheap
 }
 
-function onSetFilterBy(filterBy) {
-    setFilterBy(filterBy)
-    renderBooks()
-}
-
-function onResetFilter() {
-    setFilterBy({ title: '' })
-    renderBooks()
-
-    const elTitle = document.querySelector(".book-title");
-    elTitle.value = ''
-}
 
 function onUpdateRating(ev, diff) {
     ev.preventDefault()
@@ -214,6 +208,23 @@ function onUpdateRating(ev, diff) {
     const bookId = elDetails.dataset.bookId
     const book = updateRating(bookId, +diff)
     elDetails.querySelector(".rate").innerText = book.rating
+}
+
+function onSetFilterBy(filterBy) {
+    if(filterBy.title !== undefined) {
+        gQueryOptions.filterBy.title = filterBy.title
+    } else if (filterBy.rating !== undefined) {
+        gQueryOptions.filterBy.rating = filterBy.rating
+    }
+    renderBooks()
+}
+
+function onResetFilter() {
+    gQueryOptions.filterBy = { title: '', rating: 0 }
+    renderBooks()
+
+    const elTitle = document.querySelector(".book-title");
+    elTitle.value = ''
 }
 
 function flashMsg(msg) {

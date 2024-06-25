@@ -80,6 +80,8 @@ main.main-content {
 .actions {
     display: flex;
     gap: 1em;
+
+    width: 90vw;
     justify-content: space-between;
 }
 
@@ -116,12 +118,13 @@ td button:nth-of-type(even) {
 }
 
 .book-details {
-    width: 50vw;
-    height: 60vh;
+    max-width: 50vw;
+    max-height: 60vh;
     margin-block-start: 1.5em;
     padding-block-end: 1em;
     padding-inline: 3em;
     text-align: center;
+    
     border: 0;
     border-radius: 1em;
     background-color: lightblue;
@@ -171,7 +174,7 @@ td button:nth-of-type(even) {
 .cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5em;
+    gap: .5em;
     
     margin-block: 1em;
 
@@ -180,12 +183,15 @@ td button:nth-of-type(even) {
 }
 
 .cards-container article {
-    background-color: hsl(var(--clr-background));
+    position: relative;
     flex-basis: 250px;
+    flex-grow: 1;
+
     padding: 0.5em;
-    border: 0.2em solid hsl(var(--clr-black));
-    border-radius: 0.5em;
+    border: 0.1em solid hsl(var(--clr-black));
+    border-radius: 0.3em;
     text-align: center;
+    background-color: hsl(var(--clr-background));
 }
 
 .cards-container article:nth-of-type(even) {
@@ -238,7 +244,7 @@ footer {
 td button,
 .book-details button,
 .cards-container button,
-.add, .clear,
+.actions button, .clear,
 .library-control button,
 .book-edit-modal button, 
 .rate {
@@ -254,9 +260,7 @@ td button,
     color: hsl(var(--clr-background));
 }
 
-.clear {
-    background-color: lightgrey;
-}
+
 
 .close {
     position: absolute;
