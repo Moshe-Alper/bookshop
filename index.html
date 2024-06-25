@@ -18,22 +18,23 @@
             <section class="filter">
                 <form>
                     <label> Search by title:
-                        <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text" placeholder="Book title"
-                            name="by-title" />
+                        <input oninput="onSetFilterBy({ title: this.value })" class="book-title" type="text"
+                            placeholder="Book title" name="by-title" />
                     </label>
 
                     <label>
                         <Filter by rating:>
-                        <select onchange="onSetFilterBy({ rating: this.value })" class="book-rating" name="by-rating">
-                            <option value="">Select rating</option>
-                            <option value="1">1 star</option>
-                            <option value="2">2 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="5">5 stars</option>
-                        </select>
+                            <select onchange="onSetFilterBy({ rating: this.value })" class="book-rating"
+                                name="by-rating">
+                                <option value="">Select rating</option>
+                                <option value="1">1 star</option>
+                                <option value="2">2 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="5">5 stars</option>
+                            </select>
                     </label>
-                    
+
                     <button onclick="onResetFilter()" class="clear">Clear filters</button>
                 </form>
 
@@ -48,32 +49,32 @@
                     <div>
                         <input type="radio" id="ascending" name="sortOrder" value="ascending" checked />
                         <label for="ascending">Ascending</label>
-                      </div>
-                    
-                      <div>
+                    </div>
+
+                    <div>
                         <input type="radio" id="descending" name="sortOrder" value="descending" />
                         <label for="descending">Descending</label>
-                      </div>
-                    
+                    </div>
+
                 </section>
 
             </section>
-                <div class="layout">
-                    <span>Layout:</span>
-                    <button onclick="onSetLayout('table')"><i class="fa fa-table" aria-hidden="true"></i></button>
-                    <button onclick="onSetLayout('cards')"><i class="fa fa-th-list" aria-hidden="true"></i>
-                    </button>
-                </div>
-                
-            </section>
-            
-                        <div class="actions">
-                            <button onclick="onAddBook()" class="add">Add Book</button>
-                            <div class="pagination">
-                                <button>Back</button>
-                                <button>Next</button>
-                            </div>
-                        </div>
+            <div class="layout">
+                <span>Layout:</span>
+                <button onclick="onSetLayout('table')"><i class="fa fa-table" aria-hidden="true"></i></button>
+                <button onclick="onSetLayout('cards')"><i class="fa fa-th-list" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </section>
+
+        <section class="actions">
+            <button onclick="onAddBook()" class="add">Add Book</button>
+            <div class="pagination">
+                <button onclick="onPrevPage()">Previous</button>
+                <button onclick="onNextPage()">Next</button>
+        </section>
+        </div>
 
         <table>
             <thead>
@@ -90,7 +91,7 @@
         </table>
 
         <section class="cards-container">
-      
+
         </section>
 
         <dialog class="book-details">
@@ -107,8 +108,8 @@
                         <button onclick="onUpdateRating(event, 1)">+</button>
                         <span class="rate">0</span>
                         <button onclick="onUpdateRating(event, -1)">-</button>
-                      </div>
                     </div>
+                </div>
                 </div>
 
 
@@ -131,7 +132,7 @@
         </section>
     </footer>
 
-    
+
     <dialog class="book-edit-modal">
         <h3>Add a book</h3>
         <form method="dialog" onsubmit="onSaveBook()">
@@ -139,20 +140,20 @@
                 <span>Title:</span>
                 <input name="book-title" type="text" placeholder="Book Title" autocomplete="off" />
             </div>
-            
+
             <div>
                 <span>Price</span>:
                 <input name="book-price" type="number" step=".01" placeholder="Book Price" autocomplete="off" />
             </div>
-            
+
             <div class="edit-actions">
                 <button>Save</button>
                 <button type="button" onclick="onCloseBookEditModal()">Cancel</button>
             </div>
-            
+
         </form>
     </dialog>
-    
+
     <div class="user-msg"></div>
 
     <script src="https://kit.fontawesome.com/2fcb60592b.js" crossorigin="anonymous"></script>

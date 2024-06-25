@@ -7,12 +7,12 @@ _createBooks()
 function getBooks(options = {}) {
     const filterBy = options.filterBy
     const sortBy = options.sortBy
+    const page = options.page
     
     var books = gBooks
 
-    if(filterBy.title) books = books.filter(book => book.title.toLowerCase().includes(filterBy.title.toLowerCase()))
-    if(filterBy.rating) books = books.filter(book => book.rating >= filterBy.rating)
-   
+    books = _filterBooks(filterBy)
+
    if(sortBy.title) {
         books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
    } 
@@ -22,13 +22,15 @@ function getBooks(options = {}) {
    if(sortBy.rating) {
     books = books.toSorted((b1,b2)=> (b1.rating - b2.rating) * sortBy.rating)
    }
+
+   const startIdx = page.idx * page.size
+   const endIdx =  startIdx + page.size
    
+   books = books.slice(startIdx, endIdx)
+
+
     return books
 }
-
-// var gFilterBy = {
-//     title: ''
-// }
 
 function setFilterBy(filterBy) {
     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
@@ -39,7 +41,6 @@ function getBookById(bookId) {
     const book = gBooks.find(book => book.id === bookId)
     return book
 }
-
 
 function getExpensiveBooksCount() {
     return gBooks.filter(book => book.price > 200).length
@@ -96,6 +97,22 @@ function updateRating(bookId, diff) {
     return book
 }
 
+function getPageCount(options) {
+    const filterBy = options.filterBy
+    const page = options.page
+
+    var booksLength = _filterBooks(filterBy).length
+    var pageCount = Math.ceil(booksLength / page.size)
+    return pageCount
+}
+
+function _filterBooks(filterBy) {
+    var books = gBooks
+    if (filterBy.title) books = books.filter(book => book.title.toLowerCase().includes(filterBy.title.toLowerCase()))
+    if (filterBy.rating) books = books.filter(book => book.rating >= filterBy.rating)
+    return books
+}
+
 function _createBooks() {
     gBooks = loadFromStorage('books')
     if (gBooks && gBooks.length) return
@@ -119,7 +136,7 @@ function _createBook(title, price, imgUrl) {
         price: price,
         imgUrl: imgUrl || 'book-cover-placeholder.png',
         desc: makeLorem(100),
-        rating: getRandomInt(1, 5)
+        rating: getRandomIntInclusive(1, 5)
     }
 }
 

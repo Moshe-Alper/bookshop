@@ -5,8 +5,8 @@ const LAYOUT_KEY = 'layoutDB'
 var gQueryOptions = {
     filterBy: { title: '', rating: 0 },
     sortBy: {},
+    page: { idx: 0, size: 5 }
 }
-
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
 var gBookToEdit = null
@@ -242,6 +242,29 @@ function onSetSortBy() {
     renderBooks()
 }
 
+function onNextPage() {
+    const pageCount = getPageCount(gQueryOptions)
+
+    if (gQueryOptions.page.idx === pageCount -1) {
+        gQueryOptions.page.idx = 0
+    } else {
+        gQueryOptions.page.idx++
+    }
+
+    renderBooks()
+}
+
+function onPrevPage() {
+    const pageCount = getPageCount(gQueryOptions)
+
+    if (gQueryOptions.page.idx === 0) {
+        gQueryOptions.page.idx = pageCount - 1
+    } else {
+        gQueryOptions.page.idx--
+    }
+
+    renderBooks()
+}
 
 function setQueryParams() {
     const queryParams = new URLSearchParams()
