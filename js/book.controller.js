@@ -229,8 +229,18 @@ function onResetFilter() {
     elTitle.value = ''
 }
 
-// Reflect the filter values in the query string params. (Make
-//     the book list filter state book-markable)
+
+function onSetSortBy() {
+    const elSortField = document.querySelector('.sort select')
+    const elSortDir = document.querySelector('.sort input')
+
+    const sortField = elSortField.value
+    const sortDir = elSortDir.checked ? 1 : -1
+
+    gQueryOptions.sortBy = { [sortField]: sortDir}
+
+    renderBooks()
+}
 
 
 function setQueryParams() {

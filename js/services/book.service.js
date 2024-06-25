@@ -6,10 +6,23 @@ _createBooks()
 
 function getBooks(options = {}) {
     const filterBy = options.filterBy
+    const sortBy = options.sortBy
+    
     var books = gBooks
 
     if(filterBy.title) books = books.filter(book => book.title.toLowerCase().includes(filterBy.title.toLowerCase()))
     if(filterBy.rating) books = books.filter(book => book.rating >= filterBy.rating)
+   
+   if(sortBy.title) {
+        books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
+   } 
+   if(sortBy.price) {
+    books = books.toSorted((b1,b2)=> (b1.price - b2.price) * sortBy.price)
+   }
+   if(sortBy.rating) {
+    books = books.toSorted((b1,b2)=> (b1.rating - b2.rating) * sortBy.rating)
+   }
+   
     return books
 }
 

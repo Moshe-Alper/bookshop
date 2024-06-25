@@ -64,8 +64,9 @@ main.main-content {
 
 .filter {
     display: flex;
-    gap: 1em;
+    /* gap: 5em; */
     flex-basis: 70%;
+    justify-content: space-around;
 }
 
 .layout {

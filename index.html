@@ -23,7 +23,7 @@
                     </label>
 
                     <label>
-                        Filter by rating:
+                        <Filter by rating:>
                         <select onchange="onSetFilterBy({ rating: this.value })" class="book-rating" name="by-rating">
                             <option value="">Select rating</option>
                             <option value="1">1 star</option>
@@ -34,8 +34,29 @@
                         </select>
                     </label>
                     
+                    <button onclick="onResetFilter()" class="clear">Clear filters</button>
                 </form>
-                <button onclick="onResetFilter()" class="clear">Clear filters</button>
+
+                <section class="sort">
+                    <select onchange="onSetSortBy()">
+                        <option value="">Sorting Options</option>
+                        <option value="title">By Title</option>
+                        <option value="price">By Price</option>
+                        <option value="rating">By Rating</option>
+                    </select>
+
+                    <div>
+                        <input type="radio" id="ascending" name="sortOrder" value="ascending" checked />
+                        <label for="ascending">Ascending</label>
+                      </div>
+                    
+                      <div>
+                        <input type="radio" id="descending" name="sortOrder" value="descending" />
+                        <label for="descending">Descending</label>
+                      </div>
+                    
+                </section>
+
             </section>
                 <div class="layout">
                     <span>Layout:</span>
