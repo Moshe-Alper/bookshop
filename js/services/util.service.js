@@ -23,7 +23,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 function makeLorem(wordCount = 100) {
-    const words = ['The sky', 'above', 'the port', 'was', 'the color of television', 'tuned', 'to', 'a dead channel', '.', 'All', 'this happened', 'more or less', '.', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'a different story', '.', 'It', 'was', 'a pleasure', 'to', 'burn']
+	const words = ['The sky', 'above', 'the port', 'was', 'the color of television', 'tuned', 'to', 'a dead channel', '.', 'All', 'this happened', 'more or less', '.', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'a different story', '.', 'It', 'was', 'a pleasure', 'to', 'burn']
 	var txt = ''
 
 	while (wordCount-- > 0) {
@@ -33,21 +33,30 @@ function makeLorem(wordCount = 100) {
 }
 
 
-  function getWord(isUpperCase) {
+function getWord(isUpperCase) {
 	const chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 	const length = Math.floor(Math.random() * (5 - 2) + 2)
 	let word = ''
-  
+
 	for (let i = 0; i <= length; i++) {
-	  word += chars[Math.floor(Math.random() * (25 - 0 + 1) + 0)]
+		word += chars[Math.floor(Math.random() * (25 - 0 + 1) + 0)]
 	}
-  
+
 	if (isUpperCase) word = word.charAt(0).toUpperCase() + word.substring(1)
 	return word
-  }
-  
+}
 
 function formatPrice(price) {
-    return `$${price.toFixed(2)}`
+	return `$${price.toFixed(2)}`
+}
+
+function generateStarIcons(rating, maxRating = 5) {
+	const filledStarIcon = '<i class="fa-solid fa-star"></i>'
+	const emptyStarIcon = '<i class="fa-regular fa-star"></i>'
+
+	const filledStars = filledStarIcon.repeat(rating);
+	const emptyStars = emptyStarIcon.repeat(maxRating - rating)
+
+	return filledStars + emptyStars
 }
 

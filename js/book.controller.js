@@ -38,7 +38,7 @@ function renderBooksTable(books) {
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
-                <td>${book.rating}</td>
+                <td>${generateStarIcons(book.rating)}</td>
                 <td>
                     <button onclick="onReadBook('${book.id}')" class="read">Read</button>
                     <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
@@ -58,9 +58,9 @@ function renderBooksCards(books) {
     const strHTMLs = books.map(book => `<article class="card-preview">
                 <img src="img/${book.imgUrl}" alt="${book.title}" />
                 <h4>${book.title}</h4>
+                <span>${generateStarIcons(book.rating)}</span>
                 <p>${makeLorem(20)}</p>
                 <h5>${formatPrice(book.price)}<h5>
-                <h6>Rating: ${book.rating}</h6>
                 <button onclick="onReadBook('${book.id}')" class="read">Read</button>
                 <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
                 <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
