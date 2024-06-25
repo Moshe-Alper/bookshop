@@ -1,9 +1,9 @@
 'use strict'
 
-const LAYOUT_KEY =  'layoutDB'
+const LAYOUT_KEY = 'layoutDB'
 
 var gQueryOptions = {
-    filterBy: { TextTrack: '', rating: 0 },
+    filterBy: { title: '', rating: 0 },
     sortBy: {},
 }
 
@@ -12,6 +12,7 @@ var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
 var gBookToEdit = null
 
 function onInit() {
+    readQueryParams()
     renderBooks()
 }
 
@@ -33,7 +34,7 @@ function renderBooksTable(books) {
         </tr>`
         return
     }
-    const strHTMLs = gBooks.map(book => `
+    const strHTMLs = books.map(book => `
            <tr>
                 <th scope="row">${book.title}</th>
                 <td>${formatPrice(book.price)}</td>
@@ -82,9 +83,9 @@ function onSetLayout(layout) {
     gLayout = layout
     saveToStorage(LAYOUT_KEY, gLayout)
     renderBooks()
-  }
+}
 
-function onReadBook(bookId) { 
+function onReadBook(bookId) {
     const elDetails = document.querySelector('.book-details')
     const book = getBookById(bookId)
 
@@ -120,7 +121,7 @@ function onUpdateBook(bookId) {
 
     const elModal = document.querySelector('.book-edit-modal')
     const elForm = document.querySelector('.book-edit-modal form')
-    
+
     const elTitle = elForm.querySelector("input[name=book-title]")
     const elPrice = elForm.querySelector("input[name=book-price]")
 
@@ -141,7 +142,7 @@ function onAddBook() {
 
 function onSaveBook() {
     const elForm = document.querySelector('.book-edit-modal form')
-    
+
     const elTitle = elForm.querySelector("input[name=book-title]")
     const elPrice = elForm.querySelector("input[name=book-price]")
 
@@ -154,7 +155,7 @@ function onSaveBook() {
         return
     }
 
-    if(gBookToEdit) {
+    if (gBookToEdit) {
         var book = updateBook(gBookToEdit.id, title, price)
         flashMsg(`${book.title} Updated`)
 
@@ -172,8 +173,8 @@ function onSaveBook() {
 
 function resetBookEditModal() {
     const elForm = document.querySelector('.book-edit-modal form')
-    elForm.querySelector("input[name=book-title]").value = ''
-    elForm.querySelector("input[name=book-price]").value = ''
+    elForm.querySelector('input[name=book-title]').value = ''
+    elForm.querySelector('input[name=book-price]').value = ''
 
 }
 
@@ -186,15 +187,15 @@ function onCloseBookEditModal() {
 
 function renderStats() {
     const elStats = document.querySelector('footer .stats')
-    
+
     const elExpensive = elStats.querySelector('.expensive')
     const elAverage = elStats.querySelector('.average')
     const elCheap = elStats.querySelector('.cheap')
-    
-    const expensive =getExpensiveBooksCount()
+
+    const expensive = getExpensiveBooksCount()
     const average = getAverageBooksCount()
     const cheap = getCheapBooksCount()
-    
+
     elExpensive.innerText = expensive
     elAverage.innerText = average
     elCheap.innerText = cheap
@@ -204,18 +205,19 @@ function renderStats() {
 function onUpdateRating(ev, diff) {
     ev.preventDefault()
     const elDetails = document.querySelector(".book-details")
-    
+
     const bookId = elDetails.dataset.bookId
     const book = updateRating(bookId, +diff)
     elDetails.querySelector(".rate").innerText = book.rating
 }
 
 function onSetFilterBy(filterBy) {
-    if(filterBy.title !== undefined) {
+    if (filterBy.title !== undefined) {
         gQueryOptions.filterBy.title = filterBy.title
     } else if (filterBy.rating !== undefined) {
         gQueryOptions.filterBy.rating = filterBy.rating
     }
+    setQueryParams()
     renderBooks()
 }
 
@@ -226,6 +228,44 @@ function onResetFilter() {
     const elTitle = document.querySelector(".book-title");
     elTitle.value = ''
 }
+
+// Reflect the filter values in the query string params. (Make
+//     the book list filter state book-markable)
+
+
+function setQueryParams() {
+    const queryParams = new URLSearchParams()
+
+    queryParams.set('title', gQueryOptions.filterBy.title)
+    queryParams.set('rating', gQueryOptions.filterBy.rating)
+
+    const newUrl =
+        window.location.protocol + "//" +
+        window.location.host +
+        window.location.pathname + '?' + queryParams.toString()
+
+    window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function readQueryParams() {
+    const queryParams = new URLSearchParams(window.location.search)
+
+    gQueryOptions.filterBy = {
+        title: queryParams.get('title') || '',
+        rating: +queryParams.get('rating') || 0
+    }
+
+    renderQueryParams()
+}
+
+function renderQueryParams() {
+    const elForm = document.querySelector('.book-edit-modal form')
+    // console.log('elForm:', elForm)
+    // console.log(gQueryOptions.filterBy.title)
+    elForm.querySelector('input[name=book-title]').value = gQueryOptions.filterBy.title
+    elForm.querySelector('input[name=book-price]').value = gQueryOptions.filterBy.rating
+}
+
 
 function flashMsg(msg) {
     const el = document.querySelector('.user-msg')

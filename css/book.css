@@ -21,7 +21,8 @@ body {
     background-color: hsl(var(--clr-background));
 }
 
-header, footer {
+header,
+footer {
     background-color: hsl(var(--clr-header-footer));
 }
 
@@ -80,9 +81,9 @@ main.main-content {
 .actions {
     display: flex;
     gap: 1em;
-
     width: 90vw;
     justify-content: space-between;
+    margin-block-end: 1em;
 }
 
 table {
@@ -98,12 +99,13 @@ thead {
     background-color: hsl(var(--clr-table));
 }
 
-th, td {
+th,
+td {
     border: 1px solid rgb(160 160 160);
     padding: 8px 10px;
 }
 
-tbody > tr:nth-of-type(even) {
+tbody>tr:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
 
@@ -124,7 +126,7 @@ td button:nth-of-type(even) {
     padding-block-end: 1em;
     padding-inline: 3em;
     text-align: center;
-    
+
     border: 0;
     border-radius: 1em;
     background-color: lightblue;
@@ -140,8 +142,9 @@ td button:nth-of-type(even) {
 }
 
 .book-edit-modal {
+    text-align: center;
+    padding: 2em;
     background-color: hsl(var(--clr-control));
-    padding: 1em;
 }
 
 .book-edit-modal form {
@@ -149,6 +152,11 @@ td button:nth-of-type(even) {
     flex-direction: column;
     justify-content: center;
     gap: 2em;
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: space-between;
 }
 
 .book-details img {
@@ -175,7 +183,7 @@ td button:nth-of-type(even) {
     display: flex;
     flex-wrap: wrap;
     gap: .5em;
-    
+
     margin-block: 1em;
 
     resize: both;
@@ -198,8 +206,8 @@ td button:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
 
-.cards-container img {
-    max-width: 75%;
+.cards-container article img {
+    width: 200px
 }
 
 .cards-container button {
@@ -244,9 +252,10 @@ footer {
 td button,
 .book-details button,
 .cards-container button,
-.actions button, .clear,
+.actions button,
+.clear,
 .library-control button,
-.book-edit-modal button, 
+.book-edit-modal button,
 .rate {
     border: none;
     border-radius: 8px;
@@ -259,7 +268,6 @@ td button,
     background-color: hsl(var(--clr-black));
     color: hsl(var(--clr-background));
 }
-
 
 
 .close {
