@@ -36,10 +36,8 @@ function setFilterBy(filterBy) {
     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
 }
 
-
 function getBookById(bookId) {
-    const book = gBooks.find(book => book.id === bookId)
-    return book
+    return book = gBooks.find(book => book.id === bookId)
 }
 
 function getExpensiveBooksCount() {
@@ -62,8 +60,8 @@ function removeBook(bookId) {
     _saveBooksToStorage()
 }
 
-function addBook(title, price) {
-    const book = _createBook(title, price)
+function addBook(title, price, rating) {
+    const book = _createBook(title, price, rating)
     gBooks.unshift(book)
     
     _saveBooksToStorage()
@@ -125,6 +123,7 @@ function _createBooks() {
         _createBook('The Likeness', 250),
         _createBook('Black Chalk', 20),
     ]
+    
     _saveBooksToStorage()
 }
 

@@ -229,7 +229,6 @@ function onResetFilter() {
     elTitle.value = ''
 }
 
-
 function onSetSortBy() {
     const elSortField = document.querySelector('.sort select')
     const elSortDir = document.querySelector('.sort input')
@@ -287,16 +286,17 @@ function readQueryParams() {
         title: queryParams.get('title') || '',
         rating: +queryParams.get('rating') || 0
     }
-
+    // console.log('gQueryOptions.filterBy:', gQueryOptions.filterBy)
     renderQueryParams()
 }
 
 function renderQueryParams() {
     const elForm = document.querySelector('.book-edit-modal form')
-    // console.log('elForm:', elForm)
-    // console.log(gQueryOptions.filterBy.title)
-    elForm.querySelector('input[name=book-title]').value = gQueryOptions.filterBy.title
-    elForm.querySelector('input[name=book-price]').value = gQueryOptions.filterBy.rating
+    console.log('elForm:', elForm)
+    console.log(gQueryOptions.filterBy.title)
+    console.log(gQueryOptions.filterBy.rating)
+    document.querySelector(".book-title").value = gQueryOptions.filterBy.title
+    document.querySelector(".book-price").value = gQueryOptions.filterBy.rating
 }
 
 
