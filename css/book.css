@@ -70,6 +70,10 @@ main.main-content {
     background-color: hsl(var(--clr-btn2));
 }
 
+fieldset {
+    display: flex;
+}
+
 .filter {
     display: flex;
     /* gap: 5em; */
@@ -137,15 +141,15 @@ td button:nth-of-type(even) {
 }
 
 .book-details {
-    max-width: 50vw;
-    max-height: 60vh;
-    margin-block-start: 1.5em;
-    padding-block-end: 1em;
-    padding-inline: 3em;
-    text-align: center;
-
     border: 0;
+    padding: 0;
+
+    width: 675px;
+
+    text-align: center;
     border-radius: 1em;
+    border: 1px solid #00000030;
+ 
     background-color: lightblue;
 }
 
@@ -154,9 +158,24 @@ td button:nth-of-type(even) {
     justify-content: center;
     align-items: center;
     gap: 2em;
-    height: 50vh;
-    text-transform: capitalize;
+    
+    overflow: hidden;
 }
+
+.book-details .close {
+    position: absolute;
+    color: white;
+    background-color: hsl(var(--clr-black));
+}
+
+.book-rating {
+    margin-block-end: 2em;
+}
+
+.book-rating button {
+    margin-inline: .5em;
+}
+
 
 .book-edit-modal {
     text-align: center;
@@ -170,6 +189,7 @@ td button:nth-of-type(even) {
     justify-content: center;
     gap: 2em;
 }
+
 
 .edit-actions {
     display: flex;
@@ -272,7 +292,7 @@ td button,
 .actions button,
 .clear,
 .library-control button,
-.book-edit-modal button,
+.book-edit-modal button
 .rate {
     border: none;
     border-radius: 8px;

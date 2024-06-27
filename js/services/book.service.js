@@ -37,7 +37,9 @@ function getBooks(options = {}) {
 // }
 
 function getBookById(bookId) {
-    return book = gBooks.find(book => book.id === bookId)
+    const book = gBooks.find(book => book.id === bookId)
+    return book
+    
 }
 
 function getStats() {

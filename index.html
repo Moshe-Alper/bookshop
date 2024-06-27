@@ -15,6 +15,9 @@
 
     <main class="main-content">
         <section class="library-control">
+            <fieldset>
+                <legend>Filter & Sorting</legend>
+                
             <section class="filter">
                 <form>
                     <label> Search by title:
@@ -57,6 +60,8 @@
                     <label for="descending"><i class="fas fa-sort-down"></i></label>
                 </div>
             </section>
+        </fieldset>
+
             <div class="layout">
                 <span>Layout:</span>
                 <button onclick="onSetLayout('table')"><i class="fa fa-table" aria-hidden="true"></i></button>
@@ -99,15 +104,14 @@
                     <h3 class="title"></h3>
                     <p class="desc"></p>
 
-                    <div for="book-rating">
+                    <div class="book-rating">
+                        <h5>Change Rating</h5>
                         <button onclick="onUpdateRating(event, 1)">+</button>
                         <span class="rate">0</span>
                         <button onclick="onUpdateRating(event, -1)">-</button>
                     </div>
                 </div>
                 </div>
-
-
                 <button class="close">Close</button>
             </form>
         </dialog>

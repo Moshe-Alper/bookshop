@@ -283,7 +283,7 @@ function readQueryParams() {
 
     gQueryOptions.filterBy = {
         title: queryParams.get('title') || '',
-        rating: +queryParams.get('rating') || 0
+        rating: +queryParams.get('rating') || ''
     }
     // console.log('gQueryOptions.filterBy:', gQueryOptions.filterBy)
     renderQueryParams()
