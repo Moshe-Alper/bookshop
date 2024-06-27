@@ -14,13 +14,13 @@ function getBooks(options = {}) {
     books = _filterBooks(filterBy)
 
    if(sortBy.title) {
-    books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
+    return books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
    } 
    if(sortBy.price) {
-    books = books.toSorted((b1,b2)=> (b1.price - b2.price) * sortBy.price)
+    return books = books.toSorted((b1,b2)=> (b1.price - b2.price) * sortBy.price)
    }
    if(sortBy.rating) {
-    books = books.toSorted((b1,b2)=> (b1.rating - b2.rating) * sortBy.rating)
+    return books = books.toSorted((b1,b2)=> (b1.rating - b2.rating) * sortBy.rating)
    }
 
    const startIdx = page.idx * page.size
@@ -40,18 +40,15 @@ function getBookById(bookId) {
     return book = gBooks.find(book => book.id === bookId)
 }
 
-function getExpensiveBooksCount() {
-    return gBooks.filter(book => book.price > 200).length
-}
+function getStats() {
+    return gBooks.reduce((acc, book) => {
+        if (book.price > 200) acc.expensive++
+        else if (book.price > 80) acc.average++
+        else acc.cheap++
 
-function getAverageBooksCount() {
-    return gBooks.filter(book => book.price > 80 && book.price < 200).length
+        return acc
+    }, { expensive: 0, average: 0, cheap: 0 })
 }
-
-function getCheapBooksCount() {
-    return gBooks.filter(book => book.price < 80).length
-}
-
 
 function removeBook(bookId) {
     const idx = gBooks.findIndex(book => book.id === bookId)

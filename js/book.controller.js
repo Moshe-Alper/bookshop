@@ -192,9 +192,7 @@ function renderStats() {
     const elAverage = elStats.querySelector('.average')
     const elCheap = elStats.querySelector('.cheap')
 
-    const expensive = getExpensiveBooksCount()
-    const average = getAverageBooksCount()
-    const cheap = getCheapBooksCount()
+    const { expensive, average, cheap } = getStats()
 
     elExpensive.innerText = expensive
     elAverage.innerText = average
