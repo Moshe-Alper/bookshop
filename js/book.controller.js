@@ -229,11 +229,11 @@ function onResetFilter() {
 }
 
 function onSetSortBy() {
-    const elSortField = document.querySelector('.sort select')
-    const elSortDir = document.querySelector('.sort input')
+    const elSortField = document.querySelector('.sort select') || { value: 'defaultField' }
+    const elSortDir = document.querySelector('input[name="sortOrder"]:checked')  || { value: 'ascending' }
 
     const sortField = elSortField.value
-    const sortDir = elSortDir.checked ? 1 : -1
+    const sortDir = (elSortDir.value === 'ascending') ? 1 : -1
 
     gQueryOptions.sortBy = { [sortField]: sortDir}
     console.log('gQueryOptions.sortBy:', gQueryOptions.sortBy)
@@ -279,6 +279,17 @@ function setQueryParams() {
     queryParams.set('title', gQueryOptions.filterBy.title)
     queryParams.set('rating', gQueryOptions.filterBy.rating)
 
+    const sortKeys = Object.keys(gQueryOptions.sortBy)
+    if (sortKeys.length) {
+        queryParams.set('sortBy', sortKeys[0])
+        queryParams.set('sortDir', gQueryOptions.sortBy[sortKeys[0]])
+    }
+
+    if (gQueryOptions.page) {
+        queryParams.set('pageIdx', gQueryOptions.page.idx)
+        queryParams.set('pageSize', gQueryOptions.page.size)
+    }
+
     const newUrl =
         window.location.protocol + "//" +
         window.location.host +
@@ -294,7 +305,18 @@ function readQueryParams() {
         title: queryParams.get('title') || '',
         rating: +queryParams.get('rating') || ''
     }
-    // console.log('gQueryOptions.filterBy:', gQueryOptions.filterBy)
+
+    if (queryParams.get('sortBy')) {
+        const prop = queryParams.get('sortBy')
+        const dir = queryParams.get('sortDir')
+        gQueryOptions.sortBy[prop] = dir
+    }
+
+    if (queryParams.get('pageIdx')) {
+        gQueryOptions.page.idx = +queryParams.get('pageIdx')
+        gQueryOptions.page.size = +queryParams.get('pageSize')
+    }
+
     renderQueryParams()
 }
 
@@ -302,6 +324,16 @@ function renderQueryParams() {
     const elForm = document.querySelector('.filter form')
     elForm.querySelector('input[name="by-title"]').value = gQueryOptions.filterBy.title
     elForm.querySelector(('select[name="by-rating"]')).value = gQueryOptions.filterBy.rating
+
+    const sortKeys = Object.keys(gQueryOptions.sortBy)
+    const sortBy = sortKeys[0]
+    // console.log('sortBy:', sortBy)
+    const dir = gQueryOptions.sortBy[sortKeys[0]]
+    // console.log('dir:', dir)
+
+    document.querySelector('.sort select').value = sortBy || ''
+    document.querySelector('.sort input').checked = (dir === '-1') ? true : false
+
 }
 
 function flashMsg(msg) {

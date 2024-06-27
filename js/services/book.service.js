@@ -8,12 +8,12 @@ function getBooks(options = {}) {
     const filterBy = options.filterBy
     const sortBy = options.sortBy
     const page = options.page
-    
     var books = gBooks
+    
 
-    books = _filterBooks(filterBy)
+    books = _filterBooks(books, filterBy)
+    books = _sortBooks(books, sortBy)
     // console.log('books:', books)
-    books = _sortBooks(sortBy)
 
    const startIdx = page.idx * page.size
    const endIdx =  startIdx + page.size
@@ -96,7 +96,7 @@ function getPageCount(options) {
     return pageCount
 }
 
-function _filterBooks(filterBy) {
+function _filterBooks(books, filterBy) {
     var books = gBooks
     if (filterBy.title) books = books.filter(book => book.title.toLowerCase().includes(filterBy.title.toLowerCase()))
     if (filterBy.rating) books = books.filter(book => book.rating >= filterBy.rating)
@@ -119,8 +119,8 @@ function _createBooks() {
     _saveBooksToStorage()
 }
 
-function _sortBooks(sortBy) {
-    var books = gBooks
+function _sortBooks(books, sortBy) {
+    // var books = gBooks
 
     if (sortBy.title) {
         books = books.toSorted((b1, b2) => b1.title.localeCompare(b2.title) * sortBy.title)
