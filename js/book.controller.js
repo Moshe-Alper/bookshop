@@ -223,10 +223,11 @@ function onSetFilterBy(filterBy) {
 
 function onResetFilter() {
     gQueryOptions.filterBy = { title: '', rating: 0 }
+    const elForm = document.querySelector('.filter form')
+    elForm.querySelector('input[name="by-title"]').value = gQueryOptions.filterBy.title
+    elForm.querySelector(('select[name="by-rating"]')).value = gQueryOptions.filterBy.rating
     renderBooks()
 
-    const elTitle = document.querySelector(".book-title");
-    elTitle.value = ''
 }
 
 function onSetSortBy() {
@@ -291,14 +292,10 @@ function readQueryParams() {
 }
 
 function renderQueryParams() {
-    const elForm = document.querySelector('.book-edit-modal form')
-    console.log('elForm:', elForm)
-    console.log(gQueryOptions.filterBy.title)
-    console.log(gQueryOptions.filterBy.rating)
-    document.querySelector(".book-title").value = gQueryOptions.filterBy.title
-    document.querySelector(".book-price").value = gQueryOptions.filterBy.rating
+    const elForm = document.querySelector('.filter form')
+    elForm.querySelector('input[name="by-title"]').value = gQueryOptions.filterBy.title
+    elForm.querySelector(('select[name="by-rating"]')).value = gQueryOptions.filterBy.rating
 }
-
 
 function flashMsg(msg) {
     const el = document.querySelector('.user-msg')

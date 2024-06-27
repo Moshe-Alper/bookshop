@@ -14,7 +14,7 @@ function getBooks(options = {}) {
     books = _filterBooks(filterBy)
 
    if(sortBy.title) {
-        books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
+    books = books.toSorted((b1,b2)=>  b1.title.localeCompare(b2.title) * sortBy.title)
    } 
    if(sortBy.price) {
     books = books.toSorted((b1,b2)=> (b1.price - b2.price) * sortBy.price)
@@ -32,9 +32,9 @@ function getBooks(options = {}) {
     return books
 }
 
-function setFilterBy(filterBy) {
-    if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
-}
+// function setFilterBy(filterBy) {
+//     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
+// }
 
 function getBookById(bookId) {
     return book = gBooks.find(book => book.id === bookId)
@@ -112,7 +112,7 @@ function _filterBooks(filterBy) {
 }
 
 function _createBooks() {
-    gBooks = loadFromStorage('books')
+    gBooks = loadFromStorage('books') || []
     if (gBooks && gBooks.length) return
 
     gBooks = [

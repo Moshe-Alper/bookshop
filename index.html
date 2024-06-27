@@ -37,27 +37,25 @@
 
                     <button onclick="onResetFilter()" class="clear">Clear filters</button>
                 </form>
+            </section>
 
-                <section class="sort">
-                    <select onchange="onSetSortBy()">
-                        <option value="">Sorting Options</option>
-                        <option value="title">By Title</option>
-                        <option value="price">By Price</option>
-                        <option value="rating">By Rating</option>
-                    </select>
+            <section class="sort">
+                <select onchange="onSetSortBy()">
+                    <option value="">Sorting Options</option>
+                    <option value="title">By Title</option>
+                    <option value="price">By Price</option>
+                    <option value="rating">By Rating</option>
+                </select>
 
-                    <div>
-                        <input type="radio" id="ascending" name="sortOrder" value="ascending" checked />
-                        <label for="ascending"><i class="fas fa-sort-up"></i></label>
-                    </div>
+                <div>
+                    <input type="radio" id="ascending" name="sortOrder" value="ascending" checked />
+                    <label for="ascending"><i class="fas fa-sort-up"></i></label>
+                </div>
 
-                    <div>
-                        <input type="radio" id="descending" name="sortOrder" value="descending" />
-                        <label for="descending"><i class="fas fa-sort-down"></i></label>
-                    </div>
-
-                </section>
-
+                <div>
+                    <input type="radio" id="descending" name="sortOrder" value="descending" />
+                    <label for="descending"><i class="fas fa-sort-down"></i></label>
+                </div>
             </section>
             <div class="layout">
                 <span>Layout:</span>
