@@ -81,9 +81,21 @@
 
         <table>
             <thead>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Rating</th>
+                <th scope="col">
+                    <span>Title</span>
+                    <span class="sort" onclick="onSetSort('title', true)">+</span>
+                    <span class="sort" onclick="onSetSort('title', false)">-</span>
+                </th>
+                <th scope="col">
+                    <span>Price</span>
+                    <span class="sort" onclick="onSetSort('price', true)">+</span>
+                    <span class="sort" onclick="onSetSort('price', false)">-</span>
+                </th>
+                <th scope="col">
+                    <span>Rating</span>
+                    <span class="sort" onclick="onSetSort('rating', true)">+</span>
+                    <span class="sort" onclick="onSetSort('rating', false)">-</span>
+                </th>
                 <th scope="col">Actions</th>
             </thead>
             <tbody class="book-list">

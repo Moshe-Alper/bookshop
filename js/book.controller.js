@@ -236,6 +236,15 @@ function onSetSortBy() {
     const sortDir = elSortDir.checked ? 1 : -1
 
     gQueryOptions.sortBy = { [sortField]: sortDir}
+    console.log('gQueryOptions.sortBy:', gQueryOptions.sortBy)
+
+    renderBooks()
+}
+
+function onSetSort(sortField, isAscending) {
+    const sortDir = isAscending ? 1 : -1
+
+    gQueryOptions.sortBy = { [sortField]: sortDir}
 
     renderBooks()
 }

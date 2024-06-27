@@ -325,3 +325,11 @@ input {
 input::placeholder {
     color: hsl(var(--clr-table));
 }
+
+.sort-field {
+    color: red;
+}
+
+.sort {
+    cursor: pointer;
+}
