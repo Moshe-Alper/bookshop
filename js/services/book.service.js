@@ -9,7 +9,6 @@ function getBooks(options = {}) {
     const sortBy = options.sortBy
     const page = options.page
     var books = gBooks
-    
 
     books = _filterBooks(books, filterBy)
     books = _sortBooks(books, sortBy)
@@ -90,8 +89,8 @@ function updateRating(bookId, diff) {
 function getPageCount(options) {
     const filterBy = options.filterBy
     const page = options.page
-
-    var booksLength = _filterBooks(filterBy).length
+    
+    var booksLength = _filterBooks(gBooks, filterBy).length
     var pageCount = Math.ceil(booksLength / page.size)
     return pageCount
 }

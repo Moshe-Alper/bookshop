@@ -236,8 +236,7 @@ function onSetSortBy() {
     const sortDir = (elSortDir.value === 'ascending') ? 1 : -1
 
     gQueryOptions.sortBy = { [sortField]: sortDir}
-    console.log('gQueryOptions.sortBy:', gQueryOptions.sortBy)
-
+    setQueryParams()
     renderBooks()
 }
 
@@ -245,12 +244,13 @@ function onSetSort(sortField, isAscending) {
     const sortDir = isAscending ? 1 : -1
 
     gQueryOptions.sortBy = { [sortField]: sortDir}
-
+    setQueryParams()
     renderBooks()
 }
 
 function onNextPage() {
     const pageCount = getPageCount(gQueryOptions)
+    console.log('pageCount:', pageCount)
 
     if (gQueryOptions.page.idx === pageCount -1) {
         gQueryOptions.page.idx = 0
@@ -258,6 +258,7 @@ function onNextPage() {
         gQueryOptions.page.idx++
     }
 
+    setQueryParams()
     renderBooks()
 }
 
@@ -270,6 +271,7 @@ function onPrevPage() {
         gQueryOptions.page.idx--
     }
 
+    setQueryParams()
     renderBooks()
 }
 
