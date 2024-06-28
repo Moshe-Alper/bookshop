@@ -5,7 +5,8 @@ const LAYOUT_KEY = 'layoutDB'
 var gQueryOptions = {
     filterBy: { title: '', rating: 0 },
     sortBy: {},
-    page: { idx: 0, size: 5 }
+    page: { idx: 0, size: 5 },
+    bookId : {}
 }
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
@@ -97,6 +98,12 @@ function onReadBook(bookId) {
     elDetails.dataset.bookId = bookId
 
     elDetails.showModal()
+
+    if (elDetails.open) {
+        gQueryOptions.bookId = bookId
+        // console.log('gQueryOptions.bookId', gQueryOptions.bookId);
+        setQueryParams()
+    }
 }
 
 
@@ -250,7 +257,6 @@ function onSetSort(sortField, isAscending) {
 
 function onNextPage() {
     const pageCount = getPageCount(gQueryOptions)
-    console.log('pageCount:', pageCount)
 
     if (gQueryOptions.page.idx === pageCount -1) {
         gQueryOptions.page.idx = 0
@@ -292,6 +298,10 @@ function setQueryParams() {
         queryParams.set('pageSize', gQueryOptions.page.size)
     }
 
+    if (gQueryOptions.bookId) {
+        queryParams.set('bookId', gQueryOptions.bookId)
+    }
+
     const newUrl =
         window.location.protocol + "//" +
         window.location.host +
@@ -319,7 +329,11 @@ function readQueryParams() {
         gQueryOptions.page.size = +queryParams.get('pageSize')
     }
 
-    renderQueryParams()
+    if (queryParams.get('bookId')) {
+        gQueryOptions.bookId = queryParams.get('bookId')
+    }
+
+     renderQueryParams()
 }
 
 function renderQueryParams() {
@@ -335,7 +349,6 @@ function renderQueryParams() {
 
     document.querySelector('.sort select').value = sortBy || ''
     document.querySelector('.sort input').checked = (dir === '-1') ? true : false
-
 }
 
 function flashMsg(msg) {
