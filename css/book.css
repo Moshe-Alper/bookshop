@@ -50,7 +50,7 @@ main.main-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: 5em;
     width: 90vw;
     padding-block: 1em;
     margin-block-end: 1em;
@@ -340,4 +340,11 @@ input::placeholder {
 
 .pagination-nums button {
     margin-inline-start: .2em;
+}
+
+.set-language {
+ display: flex;
+ gap: 1em;
+ flex-direction: column;
+ font-weight: bold;
 }

@@ -397,6 +397,15 @@ function renderQueryParams() {
     document.querySelector('.sort input').checked = (dir === '-1') ? true : false
 }
 
+function onSetLang(lang) {
+    setLang(lang)
+    // if lang is hebrew add RTL class to document.body
+    if (lang === 'he') document.body.classList.add('rtl')
+    else document.body.classList.remove('rtl')
+    renderBooks()
+    doTrans()
+}
+
 function flashMsg(msg) {
     const el = document.querySelector('.user-msg')
     el.innerText = msg
