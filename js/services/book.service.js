@@ -111,10 +111,27 @@ function _createBooks() {
         _createBook('If We Were Villains', 230),
         _createBook('The Likeness', 250),
         _createBook('Black Chalk', 20),
+        
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
+        _createBook(makeLorem(3), getRandomIntInclusive(30, 300)),
     ]
-    // for (let i = 0; i < 20; i++) {
-    //     _createBook(get)   
-    // }
     
     _saveBooksToStorage()
 }

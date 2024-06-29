@@ -296,11 +296,23 @@ function renderPagination() {
     const paginationNums = document.querySelector('.pagination-nums')
     paginationNums.innerText = ''
 
-    for (var i = 0; i < pageCount; i++) {
-        const elButton = document.createElement('button') 
+    const maxButtons = 3
+    let startIdx = Math.max(0, gQueryOptions.page.idx - Math.floor(maxButtons / 2))
+    const endIdx = Math.min(startIdx + maxButtons, pageCount)
+
+    startIdx = Math.max(0, endIdx - maxButtons)
+
+    for (var i = startIdx; i < endIdx; i++) {
+        const elButton = document.createElement('button')
         elButton.textContent = i + 1
-        elButton.onclick = (function(page) { return () => goToPage(page)})(i)
-      
+        elButton.onclick = (function (page) {
+            return () => {
+                gQueryOptions.page.idx = page;
+                renderPagination()
+                goToPage(page)
+            }
+        })(i)
+
         if (i === gQueryOptions.page.idx) {
             elButton.style.fontWeight = 'bold'
         }

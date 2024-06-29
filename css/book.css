@@ -124,6 +124,7 @@ th,
 td {
     border: 1px solid rgb(160 160 160);
     padding: 8px 10px;
+    text-transform: capitalize;
 }
 
 tbody>tr:nth-of-type(even) {
@@ -335,4 +336,8 @@ input::placeholder {
 
 .sort {
     cursor: pointer;
+}
+
+.pagination-nums button {
+    margin-inline-start: .2em;
 }
