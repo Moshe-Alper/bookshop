@@ -125,6 +125,14 @@ function onReadBook(bookId) {
 
 function onUpdateBook(bookId) {
     resetBookEditModal()
+    
+    if (bookId === undefined) {
+        const elDetails = document.querySelector(".book-details")
+        const bookId = elDetails.dataset.bookId
+        // console.log('bookId:', bookId)
+        onUpdateBook(bookId)
+        return
+    }
 
     const elModal = document.querySelector('.book-edit-modal')
     const elForm = document.querySelector('.book-edit-modal form')
@@ -135,9 +143,18 @@ function onUpdateBook(bookId) {
     const book = getBookById(bookId)
     elTitle.value = book.title
     elPrice.value = book.price
-
+    
     gBookToEdit = book
     elModal.showModal()
+}
+
+function onUpdateRating(ev, diff) {
+    ev.preventDefault()
+    const elDetails = document.querySelector(".book-details")
+
+    const bookId = elDetails.dataset.bookId
+    const book = updateRating(bookId, +diff)
+    elDetails.querySelector(".rate").innerText = book.rating
 }
 
 function onAddBook() {
@@ -191,7 +208,6 @@ function onCloseBookEditModal() {
     resetBookEditModal()
 }
 
-
 function renderStats() {
     const elStats = document.querySelector('footer .stats')
 
@@ -206,15 +222,6 @@ function renderStats() {
     elCheap.innerText = cheap
 }
 
-
-function onUpdateRating(ev, diff) {
-    ev.preventDefault()
-    const elDetails = document.querySelector(".book-details")
-
-    const bookId = elDetails.dataset.bookId
-    const book = updateRating(bookId, +diff)
-    elDetails.querySelector(".rate").innerText = book.rating
-}
 
 function onSetFilterBy(filterBy) {
     if (filterBy.title !== undefined) {
