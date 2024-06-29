@@ -15,6 +15,7 @@ var gBookToEdit = null
 function onInit() {
     readQueryParams()
     renderBooks()
+    renderPagination()
 }
 
 function renderBooks() {
@@ -273,6 +274,7 @@ function onNextPage() {
 
     setQueryParams()
     renderBooks()
+    renderPagination()
 }
 
 function onPrevPage() {
@@ -286,6 +288,31 @@ function onPrevPage() {
 
     setQueryParams()
     renderBooks()
+    renderPagination()
+}
+
+function renderPagination() {
+    const pageCount = getPageCount(gQueryOptions)
+    const paginationNums = document.querySelector('.pagination-nums')
+    paginationNums.innerText = ''
+
+    for (var i = 0; i < pageCount; i++) {
+        const elButton = document.createElement('button') 
+        elButton.textContent = i + 1
+        elButton.onclick = (function(page) { return () => goToPage(page)})(i)
+      
+        if (i === gQueryOptions.page.idx) {
+            elButton.style.fontWeight = 'bold'
+        }
+        paginationNums.appendChild(elButton)
+    }
+}
+
+function goToPage(pageIdx) {
+    gQueryOptions.page.idx = pageIdx
+    setQueryParams()
+    renderBooks()
+    renderPagination()
 }
 
 function setQueryParams() {

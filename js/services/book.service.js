@@ -22,8 +22,6 @@ function getBooks(options = {}) {
    return books
 }
 
-
-
 // function setFilterBy(filterBy) {
 //     if (filterBy.title !== undefined) gFilterBy.title = filterBy.title
 // }
@@ -114,6 +112,9 @@ function _createBooks() {
         _createBook('The Likeness', 250),
         _createBook('Black Chalk', 20),
     ]
+    // for (let i = 0; i < 20; i++) {
+    //     _createBook(get)   
+    // }
     
     _saveBooksToStorage()
 }
