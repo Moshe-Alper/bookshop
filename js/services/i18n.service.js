@@ -9,6 +9,10 @@ const gTrans = {
         en: 'Filter & Sorting',
         he: 'מיין וסדר',
     },
+    read: {
+        en: 'Read',
+        he: 'קרא',
+    }
 }
 
 var gCurrLang = 'en'
@@ -43,6 +47,7 @@ function doTrans() {
 
 function setLang(lang) {
   gCurrLang = lang
+  gQueryOptions.lang = gCurrLang
 }
 
 function formatNumSimple(num) {

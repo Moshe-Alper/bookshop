@@ -6,7 +6,8 @@ var gQueryOptions = {
     filterBy: { title: '', rating: 0 },
     sortBy: {},
     page: { idx: 0, size: 5 },
-    bookId : {}
+    bookId: {}, 
+    lang: { lang: gCurrLang}
 }
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
@@ -42,7 +43,7 @@ function renderBooksTable(books) {
                 <td>${formatPrice(book.price)}</td>
                 <td>${generateStarIcons(book.rating)}</td>
                 <td>
-                    <button onclick="onReadBook('${book.id}')" class="read">Read</button>
+                    <button onclick="onReadBook('${book.id}')" class="read" data-trans="read">Read</button>
                     <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
                     <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
                 </td>
@@ -63,7 +64,7 @@ function renderBooksCards(books) {
                 <span>${generateStarIcons(book.rating)}</span>
                 <p>${makeLorem(20)}</p>
                 <h5>${formatPrice(book.price)}<h5>
-                <button onclick="onReadBook('${book.id}')" class="read">Read</button>
+                <button onclick="onReadBook('${book.id}')" class="read" data-trans="read">Read</button>
                 <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
                 <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
             </article>          
@@ -223,7 +224,6 @@ function renderStats() {
     elCheap.innerText = cheap
 }
 
-
 function onSetFilterBy(filterBy) {
     if (filterBy.title !== undefined) {
         gQueryOptions.filterBy.title = filterBy.title
@@ -338,15 +338,19 @@ function setQueryParams() {
         queryParams.set('sortBy', sortKeys[0])
         queryParams.set('sortDir', gQueryOptions.sortBy[sortKeys[0]])
     }
-
     if (gQueryOptions.page) {
         queryParams.set('pageIdx', gQueryOptions.page.idx)
         queryParams.set('pageSize', gQueryOptions.page.size)
     }
-
     if (gQueryOptions.bookId) {
         queryParams.set('bookId', gQueryOptions.bookId)
     }
+    // console.log('gQueryOptions.bookId:', gQueryOptions.bookId.toString())
+
+    if ((gQueryOptions.lang)) {
+        queryParams.set('lang', gQueryOptions.lang.toString())
+    }
+    console.log('gQueryOptions.lang:', gQueryOptions.lang)
 
     const newUrl =
         window.location.protocol + "//" +
@@ -379,7 +383,11 @@ function readQueryParams() {
         gQueryOptions.bookId = queryParams.get('bookId')
     }
 
-     renderQueryParams()
+    if (queryParams.get('lang')) {
+        gQueryOptions.lang = queryParams.get('lang')
+    }
+
+    renderQueryParams()
 }
 
 function renderQueryParams() {
@@ -395,6 +403,8 @@ function renderQueryParams() {
 
     document.querySelector('.sort select').value = sortBy || ''
     document.querySelector('.sort input').checked = (dir === '-1') ? true : false
+
+    onSetLang(gQueryOptions.lang)
 }
 
 function onSetLang(lang) {
