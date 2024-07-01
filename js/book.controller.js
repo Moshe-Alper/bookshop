@@ -6,8 +6,8 @@ var gQueryOptions = {
     filterBy: { title: '', rating: 0 },
     sortBy: {},
     page: { idx: 0, size: 5 },
-    bookId: {}, 
-    lang: { lang: gCurrLang}
+    bookId: '', 
+    lang: '{ lang: gCurrLang}' // check maybe change to ''
 }
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
@@ -102,8 +102,8 @@ function onReadBook(bookId) {
     elDetails.showModal()
 
     if (elDetails.open) {
-        gQueryOptions.bookId = bookId
-        // console.log('gQueryOptions.bookId', gQueryOptions.bookId);
+        gQueryOptions.bookId = bookId.toString()
+        console.log('gQueryOptions.bookId', gQueryOptions.bookId);
         setQueryParams()
     }
 }
@@ -127,7 +127,7 @@ function onReadBook(bookId) {
 
 function onUpdateBook(bookId) {
     resetBookEditModal()
-    
+    /// a better way maybe?
     if (bookId === undefined) {
         const elDetails = document.querySelector(".book-details")
         const bookId = elDetails.dataset.bookId
@@ -142,7 +142,7 @@ function onUpdateBook(bookId) {
     const elTitle = elForm.querySelector("input[name=book-title]")
     const elPrice = elForm.querySelector("input[name=book-price]")
 
-    const book = getBookById(bookId)
+    const book = getBookById(bookId) // if book id this if undefined the above. use let
     elTitle.value = book.title
     elPrice.value = book.price
     
@@ -206,8 +206,16 @@ function resetBookEditModal() {
 
 function onCloseBookEditModal() {
     document.querySelector('.book-edit-modal').close()
-
     resetBookEditModal()
+}
+
+function onCloseReadModal() {
+    // console.log('book controller', gQueryOptions);
+
+    document.querySelector('.book-details').close()
+    gQueryOptions.bookId = ''
+    // console.log('after closing', gQueryOptions)
+    setQueryParams()
 }
 
 function renderStats() {
@@ -343,14 +351,15 @@ function setQueryParams() {
         queryParams.set('pageSize', gQueryOptions.page.size)
     }
     if (gQueryOptions.bookId) {
-        queryParams.set('bookId', gQueryOptions.bookId)
+        console.log('from set url in  the if of book id');
+        queryParams.set('bookId', gQueryOptions.bookId.toString())
     }
-    // console.log('gQueryOptions.bookId:', gQueryOptions.bookId.toString())
 
     if ((gQueryOptions.lang)) {
         queryParams.set('lang', gQueryOptions.lang.toString())
     }
-    console.log('gQueryOptions.lang:', gQueryOptions.lang)
+    // console.log('gQueryOptions.lang:', gQueryOptions.lang)
+
 
     const newUrl =
         window.location.protocol + "//" +
@@ -380,6 +389,7 @@ function readQueryParams() {
     }
 
     if (queryParams.get('bookId')) {
+        console.log('from if in set params');
         gQueryOptions.bookId = queryParams.get('bookId')
     }
 
@@ -391,6 +401,7 @@ function readQueryParams() {
 }
 
 function renderQueryParams() {
+
     const elForm = document.querySelector('.filter form')
     elForm.querySelector('input[name="by-title"]').value = gQueryOptions.filterBy.title
     elForm.querySelector(('select[name="by-rating"]')).value = gQueryOptions.filterBy.rating
@@ -400,6 +411,10 @@ function renderQueryParams() {
     // console.log('sortBy:', sortBy)
     const dir = gQueryOptions.sortBy[sortKeys[0]]
     // console.log('dir:', dir)
+    if(gQueryOptions.bookId) {
+        console.log('book id:', gQueryOptions.bookId);
+        onReadBook(gQueryOptions.bookId)
+    }
 
     document.querySelector('.sort select').value = sortBy || ''
     document.querySelector('.sort input').checked = (dir === '-1') ? true : false
@@ -409,7 +424,6 @@ function renderQueryParams() {
 
 function onSetLang(lang) {
     setLang(lang)
-    // if lang is hebrew add RTL class to document.body
     if (lang === 'he') document.body.classList.add('rtl')
     else document.body.classList.remove('rtl')
     renderBooks()
