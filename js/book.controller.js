@@ -7,7 +7,7 @@ var gQueryOptions = {
     sortBy: {},
     page: { idx: 0, size: 5 },
     bookId: '', 
-    lang: '{ lang: gCurrLang}' // check maybe change to ''
+    lang: gCurrLang
 }
 
 var gLayout = loadFromStorage(LAYOUT_KEY) || 'table'
@@ -356,9 +356,9 @@ function setQueryParams() {
     }
 
     if ((gQueryOptions.lang)) {
-        queryParams.set('lang', gQueryOptions.lang.toString())
+        queryParams.set('lang', gQueryOptions.lang)
     }
-    // console.log('gQueryOptions.lang:', gQueryOptions.lang)
+    console.log('gQueryOptions.lang:', gQueryOptions.lang)
 
 
     const newUrl =
@@ -426,6 +426,7 @@ function onSetLang(lang) {
     setLang(lang)
     if (lang === 'he') document.body.classList.add('rtl')
     else document.body.classList.remove('rtl')
+    setQueryParams()
     renderBooks()
     doTrans()
 }
