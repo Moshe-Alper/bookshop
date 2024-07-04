@@ -221,60 +221,34 @@ td button:nth-of-type(even) {
 }
 
 .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1em;
-    margin-inline: 6em;
-    /* grid-auto-flow: dense; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+
+    margin-block: 1em;
+
+    resize: both;
+    overflow: auto;
 }
 
 .cards-container article {
-    /* position: relative;
+    position: relative;
     flex-basis: 250px;
-    flex-grow: 1; */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    
-    border: black 1px solid;
+    flex-grow: 1;
+
+    padding: 0.5em;
+    border: 0.1em solid hsl(var(--clr-black));
     border-radius: 0.3em;
     text-align: center;
     background-color: hsl(var(--clr-background));
 }
 
-/* .cards-container article:nth-of-type(even) {
+.cards-container article:nth-of-type(even) {
     background-color: rgb(237 238 242);
-} */
-
-.cards-container article h4 {
-    margin: 0;
-    grid-column: span 2;
 }
-
-.cards-container article span {
-    margin: 0;
-    grid-column: span 2;
-}
-
-.cards-container article p {
-    grid-column: span 2;
-    margin: 0;
-
-    text-transform: capitalize;
-}
-
-.cards-container article h5 {
-    margin: 0;
-    grid-column: span 2;
-    
-}
-
 
 .cards-container article img {
-    display: block;
-    width: 100%;
-    height: 40vh;
-    object-fit: scale-down;
-    grid-column: span 2;
+    width: 200px
 }
 
 .cards-container button {

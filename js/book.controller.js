@@ -62,8 +62,8 @@ function renderBooksCards(books) {
                 <img src="img/${book.imgUrl}" alt="${book.title}" />
                 <h4>${book.title}</h4>
                 <span>${generateStarIcons(book.rating)}</span>
-                <h5>${formatPrice(book.price)}<h5>
                 <p>${makeLorem(20)}</p>
+                <h5>${formatPrice(book.price)}<h5>
                 <button onclick="onReadBook('${book.id}')" class="read" data-trans="read">Read</button>
                 <button onclick="onUpdateBook('${book.id}')" class="update">Update</button>
                 <button onclick="onRemoveBook('${book.id}')" class="delete">Delete</button>
